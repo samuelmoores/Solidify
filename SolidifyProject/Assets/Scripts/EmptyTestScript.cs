@@ -9,7 +9,7 @@ public class EmptyTestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Zacks test script weeeeeeeeeee :))))");
+        Debug.Log("testing the new add commit push now wooooooo~~~~~~");
 
     }
 
