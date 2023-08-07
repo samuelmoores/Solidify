@@ -8,6 +8,7 @@ public class PlayerController_Temp : MonoBehaviour
     Animator animator;
     Camera cam;
     CharacterController characterController;
+    Rigidbody rb;
     float movementSpeed;
     float rotationSpeed;
     Vector3 camOffset;
@@ -20,10 +21,11 @@ public class PlayerController_Temp : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        movementSpeed = 4.0f;
-        rotationSpeed = 500.0f;
+        movementSpeed = 200.0f;
+        rotationSpeed = 700.0f;
         cam = GameObject.Find("MainCamera").GetComponent<Camera>();
         characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
 
         //set the camera behind the player
         //x is left/right, y is up/down, z is forward/backward
@@ -49,8 +51,6 @@ public class PlayerController_Temp : MonoBehaviour
         direction = direction.normalized;
 
         //Get the rotation based on the players direction
-        
-
         direction = (cam.transform.rotation * direction);  //////////////
         direction.y = 0;  ///
         direction = direction.normalized;  ////
@@ -58,21 +58,27 @@ public class PlayerController_Temp : MonoBehaviour
         rotation = Quaternion.LookRotation(direction, Vector3.up);
 
         //Move player with CharacterController Component
-        characterController.Move(direction * movementSpeed * Time.deltaTime);
+        //characterController.Move(direction * movementSpeed * Time.deltaTime);
 
         //Rotate the player from their current rotation to the updated rotation
         if (rotation != Quaternion.identity)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
         }
 
         //Play the animation when the player is moving
-        if(characterController.velocity != Vector3.zero)
+        Debug.Log(direction);
+        if (direction != Vector3.zero)
         {
             animator.SetBool("isMoving", true);
-        }else
+            Debug.Log("moving");
+
+        }
+        else
         {
             animator.SetBool("isMoving", false);
+            Debug.Log("not moving");
+
         }
 
         //Basic player movement with Input class
@@ -89,5 +95,13 @@ public class PlayerController_Temp : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
         */
+    }
+    private void FixedUpdate()
+    {
+        rb.velocity = direction * movementSpeed * Time.fixedDeltaTime;
+        if (rotation != Quaternion.identity)
+        {
+            rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime));
+        }
     }
 }
