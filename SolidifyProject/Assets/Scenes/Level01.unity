@@ -180,11 +180,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -208,8 +208,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129772114}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.07811661, y: -0.053761154, z: 0.0042141657, w: -0.99548477}
-  m_LocalPosition: {x: 0.497, y: 2.516, z: -2.721}
+  m_LocalRotation: {x: 0.08789123, y: 0, z: 0, w: 0.9961301}
+  m_LocalPosition: {x: 0, y: 1.8493392, z: -7.8715205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1042,7 +1042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3502128b9ede94478c453766e240b41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.89
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3502128b9ede94478c453766e240b41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1093,10 +1093,7 @@ PrefabInstance:
       addedObject: {fileID: 1516849984}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c3502128b9ede94478c453766e240b41, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1516849986}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c3502128b9ede94478c453766e240b41, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1516849985}
+      addedObject: {fileID: 1516849989}
   m_SourcePrefab: {fileID: 100100000, guid: c3502128b9ede94478c453766e240b41, type: 3}
 --- !u!1 &1453083254
 GameObject:
@@ -5943,35 +5940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63fc6367942b0a48b08018e8302df04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1516849985
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516849981}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
---- !u!136 &1516849986
-CapsuleCollider:
+--- !u!143 &1516849989
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5988,11 +5958,14 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.95
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.86, z: 0}
+  serializedVersion: 3
+  m_Height: 1.83
+  m_Radius: 0.32
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1001 &1641669510
 PrefabInstance:
   m_ObjectHideFlags: 0
