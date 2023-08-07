@@ -49,6 +49,12 @@ public class PlayerController_Temp : MonoBehaviour
         direction = direction.normalized;
 
         //Get the rotation based on the players direction
+        
+
+        direction = (cam.transform.rotation * direction);  //////////////
+        direction.y = 0;  ///
+        direction = direction.normalized;  ////
+
         rotation = Quaternion.LookRotation(direction, Vector3.up);
 
         //Move player with CharacterController Component
