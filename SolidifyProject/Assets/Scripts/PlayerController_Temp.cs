@@ -55,7 +55,8 @@ public class PlayerController_Temp : MonoBehaviour
         direction.y = 0;  ///
         direction = direction.normalized;  ////
 
-        rotation = Quaternion.LookRotation(direction, Vector3.up);
+        if(direction != Vector3.zero)
+            rotation = Quaternion.LookRotation(direction, Vector3.up);
 
         //Move player with CharacterController Component
         //characterController.Move(direction * movementSpeed * Time.deltaTime);
@@ -67,17 +68,14 @@ public class PlayerController_Temp : MonoBehaviour
         }
 
         //Play the animation when the player is moving
-        Debug.Log(direction);
         if (direction != Vector3.zero)
         {
             animator.SetBool("isMoving", true);
-            Debug.Log("moving");
 
         }
         else
         {
             animator.SetBool("isMoving", false);
-            Debug.Log("not moving");
 
         }
 
