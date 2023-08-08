@@ -13,8 +13,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        GameObject.Find("AimCamera").GetComponent<Camera>().enabled = false;
     }
 
     // Update is called once per frame
