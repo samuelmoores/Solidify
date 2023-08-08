@@ -41,15 +41,19 @@ public class PlayerController : MonoBehaviour
         //Move the character
         if (aim)
         {
+            movementSpeed = 2f;
             Quaternion currentRotation = transform.rotation;
             Quaternion newRotation = Quaternion.Euler(MainCamera.transform.eulerAngles.x, MainCamera.transform.eulerAngles.y, currentRotation.eulerAngles.z);
             transform.rotation = newRotation;
             transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+            animator.SetBool("isAiming", true);
 
         }
         else
         {
+            movementSpeed = 6f;
             transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+            animator.SetBool("isAiming", false);
         }
 
         //Check if the character is moving
