@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int numOfCollectables;
+    public int numOfCoins;
+    public int numOfEngineParts;
+    public int numOfCrystals;
+    public int numOfStones;
+
     // Start is called before the first frame update
     void Start()
     {
