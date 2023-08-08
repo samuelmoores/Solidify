@@ -30,55 +30,27 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
         movement = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up) * movement;
 
-        if(usingMouse)
-        {
-            if(Input.GetMouseButtonDown(1))
-            {
-                aim = true;
-                Aim();
-            }
-            if(Input.GetMouseButtonUp(1))
-            {
-                aim = false;
-                Aim();
-            }
-        }
+        GetAimInput();
 
-        if(Input.GetAxis("LeftTrigger") == 1f)
-        {
-            usingMouse = false;
-            aim = true;
-            Aim();
-        }
-
-        if(!usingMouse)
-        {
-            if(Input.GetAxis("LeftTrigger") == 0f)
-            {
-                aim = false;
-                Aim();
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            usingMouse = true;
-            aim = true;
-            Aim();
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            aim = false;
-            Aim();
-        }
-
+        Aim();
 
     }
 
     void Move()
     {
         //Move the character
-        transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+        if (aim)
+        {
+            Quaternion currentRotation = transform.rotation;
+            Quaternion newRotation = Quaternion.Euler(MainCamera.transform.eulerAngles.x, MainCamera.transform.eulerAngles.y, currentRotation.eulerAngles.z);
+            transform.rotation = newRotation;
+            transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+
+        }
+        else
+        {
+            transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+        }
 
         //Check if the character is moving
         if (movement != Vector3.zero)
@@ -86,9 +58,13 @@ public class PlayerController : MonoBehaviour
             //Start animation
             animator.SetBool("isMoving", true);
 
-            //Get the rotation that the character will turn to and turn the character
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
+            //Only rotate the character is they are not aiming
+            if(!aim)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
+            }
+
         }
         else animator.SetBool("isMoving", false);
     }    
@@ -97,14 +73,51 @@ public class PlayerController : MonoBehaviour
     {
         if(aim)
         {
-            Debug.Log("Aim");
             AimCamera.enabled = true;
             MainCamera.enabled = false;
         }else
         {
-            Debug.Log("Stop Aim");
             MainCamera.enabled = true;
             AimCamera.enabled = false;
+        }
+    }
+
+    void GetAimInput()
+    {
+        if (usingMouse)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                aim = true;
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                aim = false;
+            }
+        }
+
+        if (Input.GetAxis("LeftTrigger") == 1f)
+        {
+            usingMouse = false;
+            aim = true;
+        }
+
+        if (!usingMouse)
+        {
+            if (Input.GetAxis("LeftTrigger") == 0f)
+            {
+                aim = false;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            usingMouse = true;
+            aim = true;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            aim = false;
         }
     }
 }
