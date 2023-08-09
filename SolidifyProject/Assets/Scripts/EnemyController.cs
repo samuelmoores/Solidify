@@ -8,7 +8,6 @@ public class EnemyController : MonoBehaviour
     public GameObject Destination;
     public GameObject SnowBallRef;
     public Transform ThrowRef;
-    public Camera cam;
 
     NavMeshAgent agent;
     Animator animator;
@@ -37,7 +36,6 @@ public class EnemyController : MonoBehaviour
         if (agent.remainingDistance < 20 && !agent.pathPending)
         {
             attackCooldown -= Time.deltaTime;
-            Debug.Log(attackCooldown);
 
             //Stop the yeti and play throw animation
             agent.isStopped = true;
