@@ -5,16 +5,32 @@ using UnityEngine;
 public class IceGun : MonoBehaviour
 {
     public Transform gunContainer;
+    public GameObject bulletRef;
+    GameObject bullet;
+    public Transform ShootPosition;
+    Vector3 shotDirection;
+    public float gunStrength;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Shoot()
+    {
+        bullet = Instantiate(bulletRef, ShootPosition.position, Quaternion.Euler(0, 0, -150));
+        Destroy(bullet, 7f);
+        shotDirection = new Vector3(0f, -ShootPosition.position.y, 0f);
+        if (bullet != null)
+        {
+            bullet.GetComponent<Rigidbody>().AddForce(ShootPosition.transform.forward * gunStrength, ForceMode.Impulse);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
