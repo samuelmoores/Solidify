@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public bool hasGun = false;
     bool jumping = false;
     bool shooting = false;
+    bool dodging = false;
 
     // Update is called once per frame
     void Update()
@@ -34,11 +35,6 @@ public class PlayerController : MonoBehaviour
             AimCamera.enabled = false;
         }
 
-        if (Input.GetButtonUp("Jump"))
-        {
-            Jump();
-        }
-        
 
     }
     
@@ -52,8 +48,25 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
         movement = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up) * movement;
 
-        if(!jumping)
+        if (Input.GetButtonUp("Jump") && !jumping)
+        {
+            Jump();
+        }
+
+        if (!jumping)
             GetAimInput();
+
+        if(Input.GetButtonDown("Dodge") || Input.GetKeyDown(KeyCode.F))
+        {
+            Dodge();
+        }
+
+        if(Input.GetButtonUp("Dodge") || Input.GetKeyUp(KeyCode.F))
+        {
+            animator.SetBool("isDodging", false);
+
+            dodging = false;
+        }
 
     }
 
@@ -177,9 +190,20 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 10, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(Vector3.up * 600, ForceMode.Impulse);
         animator.SetBool("isJumping", true);
         jumping = true;
+    }
+
+    void Dodge()
+    {
+        if (!dodging && !jumping)
+        {
+            GetComponent<Rigidbody>().AddForce(transform.forward * 900, ForceMode.Impulse);
+            animator.SetBool("isDodging", true);
+            dodging = true;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
