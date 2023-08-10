@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     bool aim;
     bool usingMouse = true;
     public bool hasGun = false;
+    bool jumping = false;
 
     // Update is called once per frame
     void Update()
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour
         GetInput();
         Move();
 
-        if(aim && hasGun)
+        if(aim && hasGun && !jumping)
         {
             Aim();
         }
@@ -31,8 +33,14 @@ public class PlayerController : MonoBehaviour
             AimCamera.enabled = false;
         }
 
-    }
+        if (Input.GetButtonUp("Jump"))
+        {
+            Jump();
+        }
+        
 
+    }
+    
     void GetInput()
     {
         //Gather input from input manager
@@ -43,7 +51,8 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
         movement = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up) * movement;
 
-        GetAimInput();
+        if(!jumping)
+            GetAimInput();
 
     }
 
@@ -146,12 +155,41 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isShooting", false);
         }
 
+        if (Input.GetButtonDown("Fire2"))
+        {
+            animator.SetBool("isShooting", true);
+            iceGun.ShootStone();
+        }
+        if (Input.GetButtonUp("Fire2"))
+        {
+            animator.SetBool("isShooting", false);
+        }
+
+    }
+
+    void Jump()
+    {
+        GetComponent<Rigidbody>().AddForce(Vector3.up * 10, ForceMode.Impulse);
+        animator.SetBool("isJumping", true);
+        jumping = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Gun"))
             hasGun = true;
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.CompareTag("Environment"))
+        {
+            animator.SetBool("isJumping", false);
+            jumping = false;
+
+        }
     }
 
 }

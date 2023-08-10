@@ -9,6 +9,7 @@ TagManager:
   - EnginePart
   - Coin
   - Gun
+  - Environment
   layers:
   - Default
   - TransparentFX

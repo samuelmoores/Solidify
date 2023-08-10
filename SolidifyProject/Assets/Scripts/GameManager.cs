@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public AudioSource BGSound;
+    public AudioSource BGMusic;
+
     public int numOfCoins;
     public int numOfEngineParts;
     public int numOfCrystals;
@@ -14,6 +16,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         BGSound.Play();
+        BGMusic.Play();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         GameObject.Find("AimCamera").GetComponent<Camera>().enabled = false;

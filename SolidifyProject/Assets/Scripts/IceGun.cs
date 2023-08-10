@@ -5,10 +5,16 @@ using UnityEngine;
 public class IceGun : MonoBehaviour
 {
     public Transform gunContainer;
-    public GameObject bulletRef;
+    public GameObject IceCubeRef;
+    public GameObject StoneRef;
     public AudioSource shootingSound;
-    GameObject bullet;
-    public Transform ShootPosition;
+    public Transform IceCubeShootPosition;
+    public Transform StoneShootPosition;
+
+
+    GameObject IceCube;
+    GameObject Stone;
+
     Vector3 shotDirection;
     public float gunStrength;
     // Start is called before the first frame update
@@ -25,14 +31,25 @@ public class IceGun : MonoBehaviour
     public void Shoot()
     {
         shootingSound.Play();
-        bullet = Instantiate(bulletRef, ShootPosition.position, Quaternion.Euler(0, 0, -150));
-        Destroy(bullet, 7f);
-        shotDirection = new Vector3(0f, -ShootPosition.position.y, 0f);
-        if (bullet != null)
+        IceCube = Instantiate(IceCubeRef, IceCubeShootPosition.position, Quaternion.Euler(0, 0, -150));
+        Destroy(IceCube, 7f);
+        shotDirection = new Vector3(0f, -IceCubeShootPosition.position.y, 0f);
+        if (IceCube != null)
         {
-            bullet.GetComponent<Rigidbody>().AddForce(ShootPosition.transform.forward * gunStrength, ForceMode.Impulse);
+            IceCube.GetComponent<Rigidbody>().AddForce(IceCubeShootPosition.transform.forward * gunStrength, ForceMode.Impulse);
         }
 
+    }
+
+    public void ShootStone()
+    {
+        Stone = Instantiate(StoneRef, StoneShootPosition.position, Quaternion.Euler(0, 0, -150));
+        Destroy(Stone, 2f);
+        shotDirection = new Vector3(0f, -StoneShootPosition.position.y, 0f);
+        if (Stone != null)
+        {
+            Stone.GetComponent<Rigidbody>().AddForce(StoneShootPosition.transform.forward * gunStrength * 3, ForceMode.Impulse);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
