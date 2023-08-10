@@ -248,11 +248,12 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Snowball"))
         {
-            if(!isHit)
+            if(!isHit && !dodging)
             {
                 Debug.Log(isHit);
                 animator.SetBool("isHit", true);
                 isHit = true;
+                aim = false;
             }
         }
 

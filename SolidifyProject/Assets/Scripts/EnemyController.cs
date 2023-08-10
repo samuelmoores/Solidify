@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
 
         Debug.Log(attackCooldown);
 
-        if (agent.remainingDistance < 20 && !agent.pathPending)
+        if (agent.remainingDistance < 75 && !agent.pathPending)
         {
             attackCooldown -= Time.deltaTime;
 
@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
 
 
         }
-        else if(agent.remainingDistance > 20 && !agent.pathPending)
+        else if(agent.remainingDistance > 75 && !agent.pathPending)
         {
             agent.isStopped = false;
             animator.SetBool("isWalking", true);
@@ -93,7 +93,7 @@ public class EnemyController : MonoBehaviour
 
         //Throw Snow Ball
         GameObject SnowBall = Instantiate(SnowBallRef, ThrowRef.position, Quaternion.identity);
-        SnowBall.GetComponent<Rigidbody>().AddForce(ThrowRef.transform.forward * 1850, ForceMode.Impulse);
+        SnowBall.GetComponent<Rigidbody>().AddForce(ThrowRef.transform.forward * 4150, ForceMode.Impulse);
         hasThrown = true;
        
     }
