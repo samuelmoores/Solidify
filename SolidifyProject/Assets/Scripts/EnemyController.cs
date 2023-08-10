@@ -8,23 +8,28 @@ public class EnemyController : MonoBehaviour
     public GameObject Destination;
     public GameObject SnowBallRef;
     public Transform ThrowRef;
+    public GameObject Player;
+    public PlayerController PlayerController;
+    bool hitPlayer;
+    bool hasThrown;
 
     NavMeshAgent agent;
     Animator animator;
     float attackCooldown;
-    bool isThrowing;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+
+        PlayerController= Player.GetComponent<PlayerController>();
+
         agent.speed = 1.0f;
         agent.isStopped = true;
         animator.SetBool("canThrow", false);
         animator.SetBool("isWalking", false);
-        attackCooldown = 5.0f;
-        isThrowing = false;
+        attackCooldown = 10.0f;
         
     }
 
@@ -32,6 +37,8 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         agent.destination = Destination.transform.position;
+
+        Debug.Log(attackCooldown);
 
         if (agent.remainingDistance < 20 && !agent.pathPending)
         {
@@ -52,11 +59,11 @@ public class EnemyController : MonoBehaviour
             animator.SetBool("canThrow", true);
 
             //Throw snow ball
-            if (attackCooldown < 4.25f && !isThrowing)
+            if (attackCooldown < 9.25f && !hasThrown)
                 ThrowSnowBall();
 
             //Transition out of animation
-            if(attackCooldown < 3 && attackCooldown > 0)
+            if (attackCooldown < 8 && attackCooldown > 0)
             {
                 animator.SetBool("canThrow", false);
             }
@@ -65,9 +72,10 @@ public class EnemyController : MonoBehaviour
             if (attackCooldown < 0)
             {
                 animator.SetBool("canThrow", true);
-                attackCooldown = 5;
-                isThrowing = false;
+                attackCooldown = 10;
+                hasThrown = false;
             }
+
 
         }
         else if(agent.remainingDistance > 20 && !agent.pathPending)
@@ -85,9 +93,8 @@ public class EnemyController : MonoBehaviour
 
         //Throw Snow Ball
         GameObject SnowBall = Instantiate(SnowBallRef, ThrowRef.position, Quaternion.identity);
-        SnowBall.GetComponent<Rigidbody>().AddForce(ThrowRef.transform.forward * 450, ForceMode.Impulse);
-        isThrowing = true;
+        SnowBall.GetComponent<Rigidbody>().AddForce(ThrowRef.transform.forward * 1850, ForceMode.Impulse);
+        hasThrown = true;
        
-
     }
 }

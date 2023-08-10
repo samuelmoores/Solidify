@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Camera AimCamera;
     public Animator animator;
     public IceGun iceGun;
+    public GameObject IceCubeMesh;
     public float movementSpeed = 6f;
     public float rotateSpeed = 600f;
     float horizontalInput;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     bool jumping = false;
     bool shooting = false;
     bool dodging = false;
+    public bool isHit = false;
+
 
     // Update is called once per frame
     void Update()
@@ -35,7 +38,6 @@ public class PlayerController : MonoBehaviour
             AimCamera.enabled = false;
         }
 
-
     }
     
     void GetInput()
@@ -48,12 +50,12 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
         movement = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up) * movement;
 
-        if (Input.GetButtonUp("Jump") && !jumping)
+        if (Input.GetButtonUp("Jump") && !jumping && !isHit)
         {
             Jump();
         }
 
-        if (!jumping)
+        if (!jumping && !isHit)
             GetAimInput();
 
         if(Input.GetButtonDown("Dodge") || Input.GetKeyDown(KeyCode.F))
@@ -63,9 +65,22 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonUp("Dodge") || Input.GetKeyUp(KeyCode.F))
         {
-            animator.SetBool("isDodging", false);
+            if(!isHit)
+            {
+                animator.SetBool("isDodging", false);
 
-            dodging = false;
+                dodging = false;
+            }
+
+        }
+
+        if(isHit)
+        {
+            IceCubeMesh.GetComponent<MeshRenderer>().enabled = true;
+        }else
+        {
+            IceCubeMesh.GetComponent<MeshRenderer>().enabled = false;
+
         }
 
     }
@@ -73,7 +88,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         //Move the character
-        if (aim && hasGun)
+        if (aim && hasGun && !isHit)
         {
             movementSpeed = 1f;
             Quaternion currentRotation = transform.rotation;
@@ -83,7 +98,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isAiming", true);
 
         }
-        else
+        else if(!isHit)
         {
             movementSpeed = 6f;
             transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
@@ -91,7 +106,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Check if the character is moving
-        if (movement != Vector3.zero)
+        if (movement != Vector3.zero && !isHit)
         {
             //Start animation
             animator.SetBool("isMoving", true);
@@ -206,6 +221,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Unfreeze()
+    {
+        Debug.Log("Unfreeze");
+        animator.SetBool("isHit", false);
+        isHit = false;
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Gun"))
@@ -222,6 +245,17 @@ public class PlayerController : MonoBehaviour
             jumping = false;
 
         }
+
+        if(collision.gameObject.CompareTag("Snowball"))
+        {
+            if(!isHit)
+            {
+                Debug.Log(isHit);
+                animator.SetBool("isHit", true);
+                isHit = true;
+            }
+        }
+
     }
 
 }

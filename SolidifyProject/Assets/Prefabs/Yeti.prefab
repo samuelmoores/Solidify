@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &111691267870108651
+--- !u!1 &8600963315538767898
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 810447801504442346}
+  - component: {fileID: 7212477695713964751}
   m_Layer: 0
   m_Name: SnowBallRef
   m_TagString: Untagged
@@ -16,22 +16,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &810447801504442346
+--- !u!4 &7212477695713964751
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111691267870108651}
+  m_GameObject: {fileID: 8600963315538767898}
   serializedVersion: 2
   m_LocalRotation: {x: -0.22848704, y: -0, z: -0, w: 0.973547}
   m_LocalPosition: {x: 0.50600004, y: 2.286, z: 0.842}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2719691050649081809}
+  m_Father: {fileID: 3253505547698321335}
   m_LocalEulerAnglesHint: {x: -26.416, y: 0, z: 0}
---- !u!1001 &2464860860351393850
+--- !u!1001 &3074972780503978076
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -41,15 +41,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.0480354
+      value: 16.055256
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.641
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.02
+      value: 41.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       propertyPath: m_LocalRotation.w
@@ -92,38 +92,33 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 810447801504442346}
+      addedObject: {fileID: 7212477695713964751}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2977950202275422704}
+      addedObject: {fileID: 8988302901174364242}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4645419953392683858}
+      addedObject: {fileID: 5898718032084703230}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9038745681335947121}
+      addedObject: {fileID: 4526667952748647925}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3598331231266732868}
+      addedObject: {fileID: 4139435167099677933}
   m_SourcePrefab: {fileID: 100100000, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
---- !u!4 &2719691050649081809 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
-  m_PrefabInstance: {fileID: 2464860860351393850}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3383778049614876011 stripped
+--- !u!1 &2768894232417692941 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
-  m_PrefabInstance: {fileID: 2464860860351393850}
+  m_PrefabInstance: {fileID: 3074972780503978076}
   m_PrefabAsset: {fileID: 0}
---- !u!195 &2977950202275422704
+--- !u!195 &8988302901174364242
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383778049614876011}
+  m_GameObject: {fileID: 2768894232417692941}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
@@ -139,13 +134,13 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &4645419953392683858
+--- !u!136 &5898718032084703230
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383778049614876011}
+  m_GameObject: {fileID: 2768894232417692941}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -162,29 +157,28 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.03, z: 0}
---- !u!114 &9038745681335947121
+--- !u!114 &4526667952748647925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383778049614876011}
+  m_GameObject: {fileID: 2768894232417692941}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 459291a9324a850419167432afc65ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Destination: {fileID: 0}
-  SnowBallRef: {fileID: 5319287538909473856, guid: 3880841de71d71e41b4b76f4b59855e0, type: 3}
-  ThrowRef: {fileID: 810447801504442346}
-  cam: {fileID: 0}
---- !u!54 &3598331231266732868
+  SnowBallRef: {fileID: 5738254337573553912, guid: 62f16cdca9f46db4492157be0e061452, type: 3}
+  ThrowRef: {fileID: 7212477695713964751}
+--- !u!54 &4139435167099677933
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383778049614876011}
+  m_GameObject: {fileID: 2768894232417692941}
   serializedVersion: 4
   m_Mass: 120
   m_Drag: 50
@@ -205,3 +199,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!4 &3253505547698321335 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 83886cbcb3efa6b40a082f3c82afc2da, type: 3}
+  m_PrefabInstance: {fileID: 3074972780503978076}
+  m_PrefabAsset: {fileID: 0}
