@@ -43,6 +43,8 @@ public class IceGun : MonoBehaviour
 
     public void ShootStone()
     {
+        shootingSound.Play();
+
         Stone = Instantiate(StoneRef, StoneShootPosition.position, Quaternion.Euler(0, 0, -150));
         Destroy(Stone, 2f);
         shotDirection = new Vector3(0f, -StoneShootPosition.position.y, 0f);

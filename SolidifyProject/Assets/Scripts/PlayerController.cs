@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     bool usingMouse = true;
     public bool hasGun = false;
     bool jumping = false;
+    bool shooting = false;
 
     // Update is called once per frame
     void Update()
@@ -145,14 +146,21 @@ public class PlayerController : MonoBehaviour
         AimCamera.enabled = true;
         MainCamera.enabled = false;
 
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetAxis("RightTrigger") == 1f || Input.GetMouseButtonDown(0))
         {
             animator.SetBool("isShooting", true);
-            iceGun.Shoot();
+            if(!shooting)
+            {
+                iceGun.Shoot();
+                shooting = true;
+            }
         }
-        if (Input.GetButtonUp("Fire1"))
+
+        if(Input.GetAxis("RightTrigger") == 0f || Input.GetMouseButtonUp(0))
         {
             animator.SetBool("isShooting", false);
+            shooting = false;
+
         }
 
         if (Input.GetButtonDown("Fire2"))
