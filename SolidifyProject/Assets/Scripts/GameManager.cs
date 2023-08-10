@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public AudioSource BGSound;
     public int numOfCoins;
     public int numOfEngineParts;
     public int numOfCrystals;
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        BGSound.Play();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         GameObject.Find("AimCamera").GetComponent<Camera>().enabled = false;

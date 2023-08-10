@@ -6,6 +6,7 @@ public class IceGun : MonoBehaviour
 {
     public Transform gunContainer;
     public GameObject bulletRef;
+    public AudioSource shootingSound;
     GameObject bullet;
     public Transform ShootPosition;
     Vector3 shotDirection;
@@ -23,6 +24,7 @@ public class IceGun : MonoBehaviour
 
     public void Shoot()
     {
+        shootingSound.Play();
         bullet = Instantiate(bulletRef, ShootPosition.position, Quaternion.Euler(0, 0, -150));
         Destroy(bullet, 7f);
         shotDirection = new Vector3(0f, -ShootPosition.position.y, 0f);
