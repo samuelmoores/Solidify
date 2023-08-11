@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public IceGun iceGun;
     public GameObject IceCubeMesh;
+    public GameObject pauseMenuRef;
+    PauseMenu pauseMenu;
     public float movementSpeed = 6f;
     public float rotateSpeed = 600f;
     float horizontalInput;
@@ -23,6 +25,10 @@ public class PlayerController : MonoBehaviour
     public bool isFrozen = false;
     public bool isDead;
 
+    private void Start()
+    {
+        pauseMenu = pauseMenuRef.GetComponent<PauseMenu>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -66,7 +72,7 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
         movement = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up) * movement;
 
-        if (Input.GetButtonUp("Jump") && !jumping && !isFrozen)
+        if (Input.GetButtonUp("Jump") && !jumping && !isFrozen && !pauseMenu.gameIsPaused)
         {
             Jump();
         }
