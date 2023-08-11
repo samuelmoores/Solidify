@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject IceCubeMesh;
     public GameObject pauseMenuRef;
     PauseMenu pauseMenu;
+    public HealthBar healthBar;
     public float movementSpeed = 6f;
     public float rotateSpeed = 600f;
     float horizontalInput;
@@ -24,10 +25,12 @@ public class PlayerController : MonoBehaviour
     bool dodging = false;
     public bool isFrozen = false;
     public bool isDead;
+    public float currentFreezeMeter;
 
     private void Start()
     {
         pauseMenu = pauseMenuRef.GetComponent<PauseMenu>();
+        healthBar.SetHealth(0);
     }
 
     // Update is called once per frame
@@ -35,6 +38,9 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         Move();
+
+        if (!pauseMenu.gameIsPaused)
+            TakeDamage(Time.deltaTime / 100);
 
         if(aim && hasGun && !jumping)
         {
@@ -46,7 +52,7 @@ public class PlayerController : MonoBehaviour
             AimCamera.enabled = false;
         }
 
-        if(isDead)
+        if (isDead)
         {
             MainCamera.enabled = false;
             DeathCamera.enabled = true;
@@ -57,7 +63,6 @@ public class PlayerController : MonoBehaviour
             MainCamera.enabled = true;
             DeathCamera.enabled = false;
             DeathCamera.transform.parent = transform;
-
         }
 
     }
@@ -143,6 +148,21 @@ public class PlayerController : MonoBehaviour
         }
         else animator.SetBool("isMoving", false);
     }    
+
+    void TakeDamage(float damage)
+    {
+        if(currentFreezeMeter < 1)
+        {
+            currentFreezeMeter += damage;
+            healthBar.SetHealth(currentFreezeMeter);
+        }
+        else
+        {
+            isDead = true;
+            Freeze();
+        }
+
+    }
 
     void GetAimInput()
     {

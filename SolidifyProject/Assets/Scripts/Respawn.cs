@@ -8,6 +8,7 @@ public class Respawn : MonoBehaviour
     PlayerController controller;
     [SerializeField] private Transform RespawnPoint;
     float respawnTimer = 4f;
+    bool playerSpawned = false;
 
     private void Start()
     {
@@ -17,17 +18,18 @@ public class Respawn : MonoBehaviour
 
     private void Update()
     {
-        if(controller.isDead)
+
+
+        if (controller.isDead)
         {
             respawnTimer -= Time.deltaTime;
            
-            if (respawnTimer < 1 && respawnTimer > 0)
+            if (respawnTimer < 1 && !playerSpawned)
                 RespawnPlayer();
 
-            if(respawnTimer < 0)
+            if (respawnTimer < 0)
             {
                 controller.isDead = false;
-                respawnTimer = 4;
             }
 
         }
@@ -37,6 +39,8 @@ public class Respawn : MonoBehaviour
     {
         controller.Unfreeze();
         Player.transform.position = RespawnPoint.transform.position;
+        playerSpawned = true;
+        controller.currentFreezeMeter = 0f;
         
     }
 
