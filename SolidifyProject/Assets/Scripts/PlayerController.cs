@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         GetInput();
         Move();
 
-
         if(aim && hasGun && !jumping)
         {
             Aim();
@@ -247,7 +246,6 @@ public class PlayerController : MonoBehaviour
 
     public void Unfreeze()
     {
-        Debug.Log("Unfreeze");
         animator.SetBool("isHit", false);
         isFrozen = false;
     }
@@ -267,7 +265,6 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isJumping", false);
             jumping = false;
-            Debug.Log("Envirnment");
 
         }
 
