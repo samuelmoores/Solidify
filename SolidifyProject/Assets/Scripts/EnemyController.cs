@@ -38,8 +38,6 @@ public class EnemyController : MonoBehaviour
     {
         agent.destination = Destination.transform.position;
 
-        Debug.Log(attackCooldown);
-
         if (agent.remainingDistance < 75 && !agent.pathPending)
         {
             attackCooldown -= Time.deltaTime;
