@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public PlayerController PlayerController;
     bool hitPlayer;
     bool hasThrown;
+    public float throwSpeed;
 
     NavMeshAgent agent;
     Animator animator;
@@ -91,7 +92,7 @@ public class EnemyController : MonoBehaviour
 
         //Throw Snow Ball
         GameObject SnowBall = Instantiate(SnowBallRef, ThrowRef.position, Quaternion.identity);
-        SnowBall.GetComponent<Rigidbody>().AddForce(ThrowRef.transform.forward * 4150, ForceMode.Impulse);
+        SnowBall.GetComponent<Rigidbody>().AddForce(ThrowRef.transform.forward * throwSpeed, ForceMode.Impulse);
         hasThrown = true;
        
     }
