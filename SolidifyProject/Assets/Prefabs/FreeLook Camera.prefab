@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &153606924656788150
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -19,7 +19,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4929885606784623272
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -35,7 +35,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8709495700908901742
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -78,7 +78,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_LegacyBlendHint: 0
-  m_ComponentOwner: {fileID: 3469383232002459189}
+  m_ComponentOwner: {fileID: 0}
 --- !u!1 &1008786846296429509
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,9 +217,9 @@ MonoBehaviour:
     m_Radius: 4.66
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
-  - {fileID: 2577832087707653636}
-  - {fileID: 1184200760612684766}
-  - {fileID: 8709495700908901742}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &9039052412045041123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_OptimalTargetDistance: 0
 --- !u!1 &1941507541161021570
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &5138109553593694546
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -285,7 +285,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1184200760612684766
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -328,7 +328,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_LegacyBlendHint: 0
-  m_ComponentOwner: {fileID: 7455043803032666644}
+  m_ComponentOwner: {fileID: 0}
 --- !u!1 &7371547470275309853
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!1 &8506569697625188010
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -572,7 +572,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &637831637682812547
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -588,7 +588,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2577832087707653636
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -631,7 +631,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_LegacyBlendHint: 0
-  m_ComponentOwner: {fileID: 8517243589481639967}
+  m_ComponentOwner: {fileID: 0}
 --- !u!1 &8733311172644796128
 GameObject:
   m_ObjectHideFlags: 0
