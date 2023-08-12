@@ -7,46 +7,31 @@ public class Respawn : MonoBehaviour
     [SerializeField] private GameObject Player;
     PlayerController controller;
     [SerializeField] private Transform RespawnPoint;
-    float respawnTimer = 4f;
-    bool playerSpawned = false;
 
     private void Start()
     {
         controller = Player.GetComponent<PlayerController>();
-          
+
     }
 
     private void Update()
     {
-
-
-        if (controller.isDead)
+        if(!controller.isFrozen && controller.isDead)
         {
-            respawnTimer -= Time.deltaTime;
-           
-            if (respawnTimer < 1 && !playerSpawned)
-                RespawnPlayer();
-
-            if (respawnTimer < 0)
-            {
-                controller.isDead = false;
-            }
-
+            RespawnPlayer();
         }
     }
 
-    private void RespawnPlayer()
+    public void RespawnPlayer()
     {
-        controller.Unfreeze();
-        Player.transform.position = RespawnPoint.transform.position;
-        playerSpawned = true;
+        controller.transform.position = RespawnPoint.position; 
         controller.currentFreezeMeter = 0f;
-        
+        controller.isDead = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player"))
         {
             controller.isDead = true;
             controller.Freeze();

@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
-        PlayerController= Player.GetComponent<PlayerController>();
+        PlayerController = Player.GetComponent<PlayerController>();
 
         agent.speed = 1.0f;
         agent.isStopped = true;

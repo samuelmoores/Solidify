@@ -1,35 +1,54 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
-    Vector3 movement;
-    public Camera MainCamera;
-    public Camera AimCamera;
-    public Camera DeathCamera;
-    public Animator animator;
-    public IceGun iceGun;
-    public GameObject IceCubeMesh;
-    public GameObject pauseMenuRef;
+    //----------------Cameras-----------------------
+    GameObject MainCamera;
+    GameObject AimCamera;
+    GameObject DeathCamera;
+
+    //------------HUD-----------------------------
+    GameObject HUD;
     PauseMenu pauseMenu;
-    public HealthBar healthBar;
-    public float movementSpeed = 6f;
-    public float rotateSpeed = 600f;
+    HealthBar healthBar;
+
+    //----------------Components--------------------
+    Animator animator;
+    IceGun iceGun;
+    public GameObject IceCubeMesh;
+
+    //-------------Movement---------------------
+    Vector3 movement;
     float horizontalInput;
     float verticalInput;
-    bool aim;
-    bool usingMouse = true;
-    public bool hasGun = false;
     bool jumping = false;
-    bool shooting = false;
     bool dodging = false;
-    public bool isFrozen = false;
-    public bool isDead;
-    public float currentFreezeMeter;
+    bool usingMouse = true;
+    float movementSpeed = 6f;
+    float rotateSpeed = 600f;
+
+    //-----------------Attacking----------------------------
+    bool aim;
+    bool shooting = false;
+    [HideInInspector] public bool hasGun = false;
+
+    //-------------Health-------------------------------------
+    [HideInInspector] public bool isFrozen = false;
+    [HideInInspector] public bool isDead = false;
+    [HideInInspector] public float currentFreezeMeter;
 
     private void Start()
     {
-        pauseMenu = pauseMenuRef.GetComponent<PauseMenu>();
+        MainCamera = GameObject.Find("Main Camera");
+        AimCamera = GameObject.Find("AimCamera");
+        DeathCamera = transform.Find("DeathCam").gameObject;
+        animator = GetComponent<Animator>();
+        HUD = GameObject.Find("HUD");
+        pauseMenu = HUD.GetComponent<PauseMenu>();
+        iceGun = GameObject.Find("IceGun").GetComponent<IceGun>();
+        healthBar = HUD.transform.GetChild(2).GetComponent<HealthBar>();
         healthBar.SetHealth(0);
     }
 
@@ -48,25 +67,25 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            MainCamera.enabled = true;
-            AimCamera.enabled = false;
+            MainCamera.SetActive(true);
+            AimCamera.SetActive(false);
         }
 
         if (isDead)
         {
-            MainCamera.enabled = false;
-            DeathCamera.enabled = true;
-            DeathCamera.transform.parent = null;
+            MainCamera.SetActive(false);
+            DeathCamera.SetActive(true);
         }
         else
         {
-            MainCamera.enabled = true;
-            DeathCamera.enabled = false;
-            DeathCamera.transform.parent = transform;
+            MainCamera.SetActive(true);
+            DeathCamera.SetActive(false);
         }
 
+        
+
     }
-    
+
     void GetInput()
     {
         //Gather input from input manager
@@ -107,9 +126,7 @@ public class PlayerController : MonoBehaviour
         }else
         {
             IceCubeMesh.GetComponent<MeshRenderer>().enabled = false;
-
         }
-
     }
 
     void Move()
@@ -184,6 +201,7 @@ public class PlayerController : MonoBehaviour
         {
             usingMouse = false;
             aim = true;
+
         }
 
         if (!usingMouse)
@@ -213,8 +231,9 @@ public class PlayerController : MonoBehaviour
 
     void Aim()
     {
-        AimCamera.enabled = true;
-        MainCamera.enabled = false;
+
+        AimCamera.SetActive(true);
+        MainCamera.SetActive(false);
 
         if (Input.GetAxis("RightTrigger") == 1f || Input.GetMouseButtonDown(0))
         {
@@ -274,6 +293,10 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isHit", false);
         isFrozen = false;
+        if(!isDead)
+        {
+
+        }
     }
 
 

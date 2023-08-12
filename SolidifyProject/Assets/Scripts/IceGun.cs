@@ -17,22 +17,12 @@ public class IceGun : MonoBehaviour
 
     Vector3 shotDirection;
     public float gunStrength;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void Shoot()
     {
         shootingSound.Play();
         IceCube = Instantiate(IceCubeRef, IceCubeShootPosition.position, Quaternion.Euler(0, 0, -150));
-        Destroy(IceCube, 7f);
+        //Destroy(IceCube, 7f);
         shotDirection = new Vector3(0f, -IceCubeShootPosition.position.y, 0f);
         if (IceCube != null)
         {

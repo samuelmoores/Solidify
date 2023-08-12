@@ -11,8 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuUI;
     public Button BackButton;
     public Button ResumeButton;
-
-
+    public GameObject HealthBar;
     // Update is called once per frame
     void Update()
     {
@@ -32,6 +31,8 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameIsPaused = false;
+        HealthBar.SetActive(true);
+
     }
     void Pause()
     {
@@ -41,6 +42,8 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         ResumeButton.Select();
+        HealthBar = GameObject.Find("HealthBar");
+        HealthBar.SetActive(false);
 
     }
 
@@ -52,6 +55,7 @@ public class PauseMenu : MonoBehaviour
     public void SelectResumeButton()
     {
         ResumeButton.Select();
+        Debug.Log("SelectResumeButton");
     }
 
     public void LoadMainMenu()

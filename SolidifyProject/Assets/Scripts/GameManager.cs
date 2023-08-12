@@ -18,9 +18,10 @@ public class GameManager : MonoBehaviour
         BGSound.Play();
         BGMusic.Play();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        GameObject.Find("AimCamera").GetComponent<Camera>().enabled = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+
+
     }
 
     // Update is called once per frame
