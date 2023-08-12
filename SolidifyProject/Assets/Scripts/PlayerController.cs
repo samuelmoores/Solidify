@@ -53,8 +53,10 @@ public class PlayerController : MonoBehaviour
         iceGun = GameObject.Find("IceGun").GetComponent<IceGun>();
         healthBar = HUD.transform.GetChild(2).GetComponent<HealthBar>();
         healthBar.SetHealth(0);
-        DeathCamera.SetActive(false);
-        DeathCamera.GetComponent<AudioListener>().enabled = false;
+
+        MainCamera.SetActive(true);
+        //MainCamera.GetComponent<AudioListener>().enabled = true;
+        
     }
 
     // Update is called once per frame
@@ -183,18 +185,10 @@ public class PlayerController : MonoBehaviour
                 Unfreeze();
                 currentFreezeMeter = 0;
                 SolidifiedTimer = 5;
-                MainCamera.SetActive(true);
-                MainCamera.GetComponent<AudioListener>().enabled = true;
                 DeathCamera.SetActive(false);
-                DeathCamera.GetComponent<AudioListener>().enabled = false;
             }else
             {
-                //Hold the player in solidification
                 DeathCamera.SetActive(true);
-                DeathCamera.GetComponent<AudioListener>().enabled = true;
-                MainCamera.SetActive(false);
-                MainCamera.GetComponent<AudioListener>().enabled = false;
-
             }
 
         }
@@ -202,7 +196,6 @@ public class PlayerController : MonoBehaviour
         {
             Freeze();
         }
-
     }
 
     void GetAimInput()
@@ -257,7 +250,6 @@ public class PlayerController : MonoBehaviour
     {
 
         AimCamera.SetActive(true);
-        MainCamera.SetActive(false);
 
         if (Input.GetAxis("RightTrigger") == 1f || Input.GetMouseButtonDown(0))
         {
