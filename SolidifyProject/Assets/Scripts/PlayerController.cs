@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
@@ -16,19 +17,23 @@ public class PlayerController : MonoBehaviour
     HealthBar healthBar;
 
     //----------------Components--------------------
+    CharacterController characterController;
     Animator animator;
     IceGun iceGun;
     public GameObject IceCubeMesh;
 
     //-------------Movement---------------------
     Vector3 movement;
+    Vector3 velocity;
     float horizontalInput;
     float verticalInput;
     bool jumping = false;
+    public float jumpSpeed;
     bool dodging = false;
     bool usingMouse = true;
     float movementSpeed = 6f;
     float rotateSpeed = 600f;
+    float ySpeed;
 
     //-----------------Attacking----------------------------
     bool aim;
@@ -44,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        characterController = GetComponent<CharacterController>();
         MainCamera = GameObject.Find("Main Camera");
         AimCamera = GameObject.Find("AimCamera");
         DeathCamera = transform.Find("DeathCam").gameObject;
@@ -53,10 +59,7 @@ public class PlayerController : MonoBehaviour
         iceGun = GameObject.Find("IceGun").GetComponent<IceGun>();
         healthBar = HUD.transform.GetChild(2).GetComponent<HealthBar>();
         healthBar.SetHealth(0);
-
         MainCamera.SetActive(true);
-        //MainCamera.GetComponent<AudioListener>().enabled = true;
-        
     }
 
     // Update is called once per frame
@@ -95,13 +98,28 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //set the direction for the movement based on where the player is going and where the camer is looking
-        movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        movement = new Vector3(horizontalInput, 0f, verticalInput);
+        float magnitude = Mathf.Clamp01(movement.magnitude) * movementSpeed;
+        movement.Normalize();
         movement = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up) * movement;
 
-        if (Input.GetButtonUp("Jump") && !jumping && !isFrozen && !pauseMenu.gameIsPaused)
+        //Apply gravity
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+
+        if (characterController.isGrounded)
         {
-            Jump();
+            if (Input.GetButtonDown("Jump") && !isFrozen)
+            {
+                ySpeed = jumpSpeed;
+            }
         }
+        
+         animator.SetBool("isJumping", !characterController.isGrounded);
+        
+
+
+        velocity = movement * magnitude;
+        velocity.y = ySpeed;
 
         if (!jumping && !isFrozen)
             GetAimInput();
@@ -139,14 +157,14 @@ public class PlayerController : MonoBehaviour
             Quaternion currentRotation = transform.rotation;
             Quaternion newRotation = Quaternion.Euler(MainCamera.transform.eulerAngles.x, MainCamera.transform.eulerAngles.y, currentRotation.eulerAngles.z);
             transform.rotation = newRotation;
-            transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+            transform.Translate(velocity * Time.deltaTime, Space.World);
             animator.SetBool("isAiming", true);
 
         }
         else if(!isFrozen)
         {
-            movementSpeed = 6f;
-            transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+            characterController.Move(velocity * Time.deltaTime);
+            //transform.Translate(velocity * Time.deltaTime, Space.World);
             animator.SetBool("isAiming", false);
         }
 
@@ -154,10 +172,15 @@ public class PlayerController : MonoBehaviour
         if (movement != Vector3.zero && !isFrozen)
         {
             //Start animation
-            animator.SetBool("isMoving", true);
+            Debug.Log(characterController.isGrounded);
+
+            if (characterController.isGrounded)
+            {
+                animator.SetBool("isMoving", true);
+            }
 
             //Only rotate the character is they are not aiming
-            if(!aim)
+            if (!aim)
             {
                 Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
@@ -282,9 +305,9 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 600, ForceMode.Impulse);
-        animator.SetBool("isJumping", true);
-        jumping = true;
+        //GetComponent<Rigidbody>().AddForce(Vector3.up * 600, ForceMode.Impulse);
+        
+        //animator.SetBool("isJumping", true);
     }
 
     void Dodge()
@@ -324,8 +347,8 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Environment"))
         {
-            animator.SetBool("isJumping", false);
-            jumping = false;
+            //animator.SetBool("isJumping", false);
+            //jumping = false;
 
         }
 
