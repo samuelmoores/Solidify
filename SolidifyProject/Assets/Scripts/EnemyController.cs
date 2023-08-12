@@ -18,6 +18,8 @@ public class EnemyController : MonoBehaviour
     Animator animator;
     float attackCooldown;
 
+    public int attackRadius;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +41,7 @@ public class EnemyController : MonoBehaviour
     {
         agent.destination = Destination.transform.position;
 
-        if (agent.remainingDistance < 75 && !agent.pathPending)
+        if (agent.remainingDistance < attackRadius && !agent.pathPending)
         {
             attackCooldown -= Time.deltaTime;
 
@@ -58,7 +60,7 @@ public class EnemyController : MonoBehaviour
             animator.SetBool("canThrow", true);
 
             //Throw snow ball
-            if (attackCooldown < 9.25f && !hasThrown)
+            if (attackCooldown < 9.25f && !hasThrown && !PlayerController.isFrozen)
                 ThrowSnowBall();
 
             //Transition out of animation
@@ -77,7 +79,7 @@ public class EnemyController : MonoBehaviour
 
 
         }
-        else if(agent.remainingDistance > 75 && !agent.pathPending)
+        else if(agent.remainingDistance > attackRadius && !agent.pathPending)
         {
             agent.isStopped = false;
             animator.SetBool("isWalking", true);

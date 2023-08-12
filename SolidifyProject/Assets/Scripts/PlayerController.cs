@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool isFrozen = false;
     [HideInInspector] public bool isDead = false;
     [HideInInspector] public float currentFreezeMeter;
+    public List<Transform> SpawnPoints;
+    float SolidifiedTimer = 5;
 
     private void Start()
     {
@@ -59,7 +62,15 @@ public class PlayerController : MonoBehaviour
         Move();
 
         if (!pauseMenu.gameIsPaused)
-            TakeDamage(Time.deltaTime / 100);
+        {
+            if(!isFrozen)
+            {
+                TakeDamage(Time.deltaTime / 100);
+            }else
+            {
+                TakeDamage(Time.deltaTime / 5);
+            }
+        }
 
         if(aim && hasGun && !jumping)
         {
@@ -70,19 +81,6 @@ public class PlayerController : MonoBehaviour
             MainCamera.SetActive(true);
             AimCamera.SetActive(false);
         }
-
-        if (isDead)
-        {
-            MainCamera.SetActive(false);
-            DeathCamera.SetActive(true);
-        }
-        else
-        {
-            MainCamera.SetActive(true);
-            DeathCamera.SetActive(false);
-        }
-
-        
 
     }
 
@@ -117,7 +115,6 @@ public class PlayerController : MonoBehaviour
 
                 dodging = false;
             }
-
         }
 
         if(isFrozen)
@@ -173,9 +170,35 @@ public class PlayerController : MonoBehaviour
             currentFreezeMeter += damage;
             healthBar.SetHealth(currentFreezeMeter);
         }
+        else if (isFrozen)
+        {
+            //Solidified Timer
+            SolidifiedTimer -= Time.deltaTime;
+
+            if(SolidifiedTimer < 0)
+            {
+                //Unfreeze and respawn at closest spawn point
+                Unfreeze();
+                transform.position = SpawnPoints[1].position;
+                currentFreezeMeter = 0;
+                SolidifiedTimer = 5;
+                MainCamera.SetActive(true);
+                MainCamera.GetComponent<AudioListener>().enabled = true;
+                DeathCamera.SetActive(false);
+                DeathCamera.GetComponent<AudioListener>().enabled = false;
+            }else
+            {
+                //Hold the player in solidification
+                DeathCamera.SetActive(true);
+                DeathCamera.GetComponent<AudioListener>().enabled = true;
+                MainCamera.SetActive(false);
+                MainCamera.GetComponent<AudioListener>().enabled = false;
+
+            }
+
+        }
         else
         {
-            isDead = true;
             Freeze();
         }
 
@@ -293,10 +316,6 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isHit", false);
         isFrozen = false;
-        if(!isDead)
-        {
-
-        }
     }
 
 

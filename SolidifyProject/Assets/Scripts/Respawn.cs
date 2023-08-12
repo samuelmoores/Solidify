@@ -7,6 +7,7 @@ public class Respawn : MonoBehaviour
     [SerializeField] private GameObject Player;
     PlayerController controller;
     [SerializeField] private Transform RespawnPoint;
+    bool hitDeadZone;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class Respawn : MonoBehaviour
 
     private void Update()
     {
-        if(!controller.isFrozen && controller.isDead)
+        if(!controller.isFrozen && hitDeadZone)
         {
             RespawnPlayer();
         }
@@ -26,14 +27,14 @@ public class Respawn : MonoBehaviour
     {
         controller.transform.position = RespawnPoint.position; 
         controller.currentFreezeMeter = 0f;
-        controller.isDead = false;
+        hitDeadZone = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            controller.isDead = true;
+            hitDeadZone = true;
             controller.Freeze();
         }
     }
