@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(aim && hasGun && !jumping)
+        if(aim && hasGun)
         {
             Aim();
         }
@@ -114,10 +114,8 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-         animator.SetBool("isJumping", !characterController.isGrounded);
+        animator.SetBool("isJumping", !characterController.isGrounded);
         
-
-
         velocity = movement * magnitude;
         velocity.y = ySpeed;
 
@@ -157,14 +155,16 @@ public class PlayerController : MonoBehaviour
             Quaternion currentRotation = transform.rotation;
             Quaternion newRotation = Quaternion.Euler(MainCamera.transform.eulerAngles.x, MainCamera.transform.eulerAngles.y, currentRotation.eulerAngles.z);
             transform.rotation = newRotation;
-            transform.Translate(velocity * Time.deltaTime, Space.World);
+            characterController.Move(velocity * Time.deltaTime);
             animator.SetBool("isAiming", true);
 
         }
         else if(!isFrozen)
         {
+            //Take away the slow aim movement
+            movementSpeed = 6f;
+            //Move the character
             characterController.Move(velocity * Time.deltaTime);
-            //transform.Translate(velocity * Time.deltaTime, Space.World);
             animator.SetBool("isAiming", false);
         }
 
