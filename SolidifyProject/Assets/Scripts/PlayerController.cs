@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
         iceGun = GameObject.Find("IceGun").GetComponent<IceGun>();
         healthBar = HUD.transform.GetChild(2).GetComponent<HealthBar>();
         healthBar.SetHealth(0);
+        DeathCamera.SetActive(false);
+        DeathCamera.GetComponent<AudioListener>().enabled = false;
     }
 
     // Update is called once per frame
@@ -179,7 +181,6 @@ public class PlayerController : MonoBehaviour
             {
                 //Unfreeze and respawn at closest spawn point
                 Unfreeze();
-                transform.position = SpawnPoints[1].position;
                 currentFreezeMeter = 0;
                 SolidifiedTimer = 5;
                 MainCamera.SetActive(true);

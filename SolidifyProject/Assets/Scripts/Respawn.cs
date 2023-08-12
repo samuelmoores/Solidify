@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    [SerializeField] private GameObject Player;
+    GameObject Player;
     PlayerController controller;
     [SerializeField] private Transform RespawnPoint;
     bool hitDeadZone;
@@ -12,7 +12,7 @@ public class Respawn : MonoBehaviour
     private void Start()
     {
         controller = Player.GetComponent<PlayerController>();
-
+        Player = GameObject.Find("Sal");
     }
 
     private void Update()
