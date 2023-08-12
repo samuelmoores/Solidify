@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -174.54466
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 63.81331
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -461.3348
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -76,22 +76,22 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 3800503653469845585, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3238637950606626857}
+      addedObject: {fileID: 4938109577920525122}
   m_SourcePrefab: {fileID: 100100000, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
---- !u!1 &1537637489408785934 stripped
+--- !u!1 &3254335720111831822 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3800503653469845585, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
   m_PrefabInstance: {fileID: 1844119558261408607}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &3238637950606626857
+--- !u!64 &4938109577920525122
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537637489408785934}
+  m_GameObject: {fileID: 3254335720111831822}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -106,4 +106,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -6153294015746077657, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}

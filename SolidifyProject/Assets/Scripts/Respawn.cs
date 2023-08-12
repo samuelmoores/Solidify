@@ -11,29 +11,34 @@ public class Respawn : MonoBehaviour
 
     private void Start()
     {
-        controller = Player.GetComponent<PlayerController>();
         Player = GameObject.Find("Sal");
+        controller = Player.GetComponent<PlayerController>();
+        
     }
 
     private void Update()
     {
         if(!controller.isFrozen && hitDeadZone)
         {
+            Debug.Log("controller frozen + hitdeadzone");/////////////
             RespawnPlayer();
         }
     }
 
     public void RespawnPlayer()
     {
-        controller.transform.position = RespawnPoint.position; 
-        controller.currentFreezeMeter = 0f;
+        Debug.Log("respawned");/////////////
+        controller.transform.position = RespawnPoint.position;  //     <!>   player doesnt teleport.
+        controller.currentFreezeMeter = 0f; //   <!>   players camera gets locked backwards when unfreezing.
         hitDeadZone = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        Debug.Log("collided");//////////
+        if (collider.gameObject.CompareTag("Player"))
         {
+            Debug.Log("collided-PLAYER");/////////////
             hitDeadZone = true;
             controller.Freeze();
         }
