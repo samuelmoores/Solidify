@@ -287,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3502128b9ede94478c453766e240b41, type: 3}
       propertyPath: m_Name
-      value: Sal 1
+      value: Sal
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3502128b9ede94478c453766e240b41, type: 3}
       propertyPath: m_TagString
@@ -331,6 +331,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c3502128b9ede94478c453766e240b41, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3210660774926965094}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c3502128b9ede94478c453766e240b41, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -731921943563855399}
   m_SourcePrefab: {fileID: 100100000, guid: c3502128b9ede94478c453766e240b41, type: 3}
 --- !u!1 &2822888352689625942 stripped
 GameObject:
@@ -404,6 +407,7 @@ MonoBehaviour:
   isFrozen: 0
   isDead: 0
   currentFreezeMeter: 0
+  SpawnPoints: []
 --- !u!82 &7640706538744365089
 AudioSource:
   m_ObjectHideFlags: 0
@@ -523,6 +527,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f0cdd6270f7cbd4fbc1e0ad3cda3446, type: 3}
   - {fileID: 8300000, guid: b448218713aa10844bbcdd5b03845210, type: 3}
   - {fileID: 8300000, guid: 28f9e87a3e5452a428abee1c82add386, type: 3}
+--- !u!114 &-731921943563855399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822888352689625942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8090852a8569ce4fb2182acf951f730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IceCubeMesh: {fileID: 0}
+  hasGun: 0
+  isFrozen: 0
+  isDead: 0
+  currentFreezeMeter: 0
+  SpawnPoints: []
 --- !u!4 &3199590572894929388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c3502128b9ede94478c453766e240b41, type: 3}
