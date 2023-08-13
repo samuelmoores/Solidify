@@ -14,9 +14,12 @@ public class IceGun : MonoBehaviour
     public Transform StoneShootPosition;
     bool canPickup;
     public GameObject interactMessage;
+    GameManager gameManager;
 
     GameObject IceCube;
     GameObject Stone;
+    List<GameObject> iceCubes;
+    [HideInInspector]public bool hasShot;
 
     Vector3 shotDirection;
     public float gunStrength;
@@ -24,6 +27,8 @@ public class IceGun : MonoBehaviour
     private void Start()
     {
         controller = Player.GetComponent<PlayerController>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        iceCubes = new List<GameObject>();
     }
 
     private void Update()
@@ -45,23 +50,34 @@ public class IceGun : MonoBehaviour
         }else
         {
             interactMessage.SetActive(false);
-
         }
-
-
 
     }
 
     public void Shoot()
     {
-        shootingSound.Play();
-        IceCube = Instantiate(IceCubeRef, IceCubeShootPosition.position, Quaternion.Euler(0, 0, -150));
-        //Destroy(IceCube, 7f);
-        shotDirection = new Vector3(0f, -IceCubeShootPosition.position.y, 0f);
-        if (IceCube != null)
+        //The player can only shoot the number of crystals plus one
+        if((controller.iceCubes <= gameManager.numOfCrystals + 1) && !hasShot)
         {
-            IceCube.GetComponent<Rigidbody>().AddForce(IceCubeShootPosition.transform.forward * gunStrength, ForceMode.Impulse);
+            controller.iceCubes++;
+            shootingSound.Play();
+            IceCube = Instantiate(IceCubeRef, IceCubeShootPosition.position, Quaternion.Euler(0, 0, -150));
+            hasShot = true;
+            iceCubes.Add(IceCube);
+            shotDirection = new Vector3(0f, -IceCubeShootPosition.position.y, 0f);
+            if (IceCube != null)
+            {
+                IceCube.GetComponent<Rigidbody>().AddForce(IceCubeShootPosition.transform.forward * gunStrength, ForceMode.Impulse);
+            }
         }
+
+        if(controller.iceCubes == gameManager.numOfCrystals + 2)
+        {
+            Destroy(iceCubes[0]);
+            iceCubes.RemoveAt(0);
+            controller.iceCubes--;
+        }
+
 
     }
 
