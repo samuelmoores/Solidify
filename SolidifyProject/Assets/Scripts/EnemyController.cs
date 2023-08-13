@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     public float throwSpeed;
     float health;
     public HealthBar healthBar;
+    bool isDead = false;
+    public GameObject HealthBar;
 
     NavMeshAgent agent;
     Animator animator;
@@ -43,23 +45,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.destination = Destination.transform.position;
-
-
-        if(agent.remainingDistance > sightDistance)
+        if (health <= 0 && !isDead)
         {
-            agent.isStopped = true;
-            animator.SetBool("isWalking", false);
-        }
-
-        if (agent.remainingDistance < attackDistance && !agent.pathPending)
-        {
-            attackCooldown -= Time.deltaTime;
-
-            //Stop the yeti and play throw animation
-            agent.isStopped = true;
-            animator.SetBool("isWalking", false);
-
             //Make sure the yeti faces the player
             agent.updateRotation = true;
             Vector3 aim = transform.position - agent.destination;
@@ -67,35 +54,70 @@ public class EnemyController : MonoBehaviour
             aimRotation *= Quaternion.Euler(0, 180, 0);
             transform.rotation = aimRotation;
 
-            //Start animation
-            animator.SetBool("canThrow", true);
+            isDead = true;
+            animator.SetBool("isDead", true);
+            HealthBar.SetActive(false);
+            Destroy(gameObject, 5);
 
-            //Throw snow ball
-            if (attackCooldown < 3.25f && !hasThrown && !PlayerController.isFrozen)
-                ThrowSnowBall();
+        }
 
-            //Transition out of animation
-            if (attackCooldown < 2 && attackCooldown > 0)
+        if (!isDead)
+        {
+            agent.destination = Destination.transform.position;
+
+
+            if (agent.remainingDistance > sightDistance)
             {
+                agent.isStopped = true;
+                animator.SetBool("isWalking", false);
+            }
+
+            if (agent.remainingDistance < attackDistance && !agent.pathPending)
+            {
+                attackCooldown -= Time.deltaTime;
+
+                //Stop the yeti and play throw animation
+                agent.isStopped = true;
+                animator.SetBool("isWalking", false);
+
+                //Make sure the yeti faces the player
+                agent.updateRotation = true;
+                Vector3 aim = transform.position - agent.destination;
+                Quaternion aimRotation = Quaternion.LookRotation(aim);
+                aimRotation *= Quaternion.Euler(0, 180, 0);
+                transform.rotation = aimRotation;
+
+                //Start animation
+                animator.SetBool("canThrow", true);
+
+                //Throw snow ball
+                if (attackCooldown < 3.25f && !hasThrown && !PlayerController.isFrozen)
+                    ThrowSnowBall();
+
+                //Transition out of animation
+                if (attackCooldown < 2 && attackCooldown > 0)
+                {
+                    animator.SetBool("canThrow", false);
+                }
+
+                //Wait for next throw
+                if (attackCooldown < 0)
+                {
+                    animator.SetBool("canThrow", true);
+                    attackCooldown = 4;
+                    hasThrown = false;
+                }
+
+
+            }
+            else if (agent.remainingDistance > attackDistance && !agent.pathPending)
+            {
+                agent.isStopped = false;
+                animator.SetBool("isWalking", true);
                 animator.SetBool("canThrow", false);
             }
-
-            //Wait for next throw
-            if (attackCooldown < 0)
-            {
-                animator.SetBool("canThrow", true);
-                attackCooldown = 4;
-                hasThrown = false;
-            }
-
-
         }
-        else if(agent.remainingDistance > attackDistance && !agent.pathPending)
-        {
-            agent.isStopped = false;
-            animator.SetBool("isWalking", true);
-            animator.SetBool("canThrow", false);
-        }
+        
     }
 
     void ThrowSnowBall()
@@ -112,7 +134,7 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            health -= 0.010f;
+            health -= 0.5f;
             healthBar.SetHealth(health);
         }
     }
