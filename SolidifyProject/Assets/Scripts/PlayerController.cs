@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     bool shooting = false;
     [HideInInspector] public bool hasGun = false;
     public float dodgeSpeed;
+    float dodgeCooldown = 0;
 
     //-------------Health-------------------------------------
     [HideInInspector] public bool isFrozen = false;
@@ -101,14 +102,24 @@ public class PlayerController : MonoBehaviour
         //Gather input from input manager
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+        
+        Debug.Log(dodgeCooldown);
 
+        dodgeCooldown -= Time.deltaTime;
+
+        if (dodging)
+        {
+            movementSpeed = 25;
+        }
+        
         //Check for dodge before calculating movement
         //so the dodge can use the players movement direction
-        if (Input.GetButton("Dodge") || Input.GetKey(KeyCode.F))
+        if ((Input.GetButton("Dodge") || Input.GetKey(KeyCode.F)) && dodgeCooldown < 0)
         {
+            dodgeCooldown = 0.95f;
             Dodge();
         }
-
+        
         //set the direction for the movement based on where the player is going and where the camer is looking
         movement = new Vector3(horizontalInput, 0f, verticalInput);
         float magnitude = Mathf.Clamp01(movement.magnitude) * movementSpeed;
@@ -327,10 +338,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!dodging && !jumping)
         {
-            movementSpeed = 25;
-
             Debug.Log("dodging");
             animator.SetBool("isDodging", true);
+            dodging = true;
         }
 
     }
