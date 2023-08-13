@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     bool hitPlayer;
     bool hasThrown;
     public float throwSpeed;
+    float health;
+    public HealthBar healthBar;
 
     NavMeshAgent agent;
     Animator animator;
@@ -32,7 +34,8 @@ public class EnemyController : MonoBehaviour
         agent.isStopped = true;
         animator.SetBool("canThrow", false);
         animator.SetBool("isWalking", false);
-        attackCooldown = 10.0f;
+        attackCooldown = 4.0f;
+        health = 1;
         
     }
 
@@ -60,11 +63,11 @@ public class EnemyController : MonoBehaviour
             animator.SetBool("canThrow", true);
 
             //Throw snow ball
-            if (attackCooldown < 9.25f && !hasThrown && !PlayerController.isFrozen)
+            if (attackCooldown < 3.25f && !hasThrown && !PlayerController.isFrozen)
                 ThrowSnowBall();
 
             //Transition out of animation
-            if (attackCooldown < 8 && attackCooldown > 0)
+            if (attackCooldown < 2 && attackCooldown > 0)
             {
                 animator.SetBool("canThrow", false);
             }
@@ -73,7 +76,7 @@ public class EnemyController : MonoBehaviour
             if (attackCooldown < 0)
             {
                 animator.SetBool("canThrow", true);
-                attackCooldown = 10;
+                attackCooldown = 4;
                 hasThrown = false;
             }
 
@@ -84,18 +87,25 @@ public class EnemyController : MonoBehaviour
             agent.isStopped = false;
             animator.SetBool("isWalking", true);
             animator.SetBool("canThrow", false);
-
         }
-
     }
 
     void ThrowSnowBall()
     {
-
         //Throw Snow Ball
         GameObject SnowBall = Instantiate(SnowBallRef, ThrowRef.position, Quaternion.identity);
+        Destroy(SnowBall, 10f);
         SnowBall.GetComponent<Rigidbody>().AddForce(ThrowRef.transform.forward * throwSpeed, ForceMode.Impulse);
         hasThrown = true;
        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+            health -= 0.010f;
+            healthBar.SetHealth(health);
+        }
     }
 }

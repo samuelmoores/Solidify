@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     public List<Transform> SpawnPoints;
     float SolidifiedTimer = 5;
 
+    //--------------Interacting-----------------------------
+    [HideInInspector] public bool interacting = false;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -108,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         if (characterController.isGrounded)
         {
-            if (Input.GetButtonDown("Jump") && !isFrozen)
+            if (Input.GetButtonDown("Jump") && !isFrozen && !pauseMenu.gameIsPaused)
             {
                 ySpeed = jumpSpeed;
             }
@@ -144,6 +147,19 @@ public class PlayerController : MonoBehaviour
         {
             IceCubeMesh.GetComponent<MeshRenderer>().enabled = false;
         }
+
+
+        if(Input.GetButton("Interact"))
+        {
+            interacting = true;
+        }
+
+        if(Input.GetButtonUp("Interact"))
+        {
+            interacting = false;
+        }
+        
+
     }
 
     void Move()
@@ -172,8 +188,7 @@ public class PlayerController : MonoBehaviour
         if (movement != Vector3.zero && !isFrozen)
         {
             //Start animation
-            Debug.Log(characterController.isGrounded);
-
+            
             if (characterController.isGrounded)
             {
                 animator.SetBool("isMoving", true);
@@ -314,7 +329,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!dodging && !jumping)
         {
-            GetComponent<Rigidbody>().AddForce(transform.forward * 900, ForceMode.Impulse);
+            //GetComponent<Rigidbody>().AddForce(transform.forward * 900, ForceMode.Impulse);
             animator.SetBool("isDodging", true);
             dodging = true;
         }

@@ -44,11 +44,11 @@ public class Collectible : MonoBehaviour
                 Debug.Log("Crystals: " + gameManager.numOfCrystals);/////
             }
 
-            if (this.CompareTag("MagicStone"))
+            if (this.CompareTag("HandWarmer"))
             {
-                gameManager.numOfStones++;
+                gameManager.numOfWarmers++;
                 GameObject.Destroy(gameObject);
-                Debug.Log("Stones: " + gameManager.numOfStones); /////
+                Debug.Log("HandWarmer: " + gameManager.numOfWarmers); /////
             }
         }
     }

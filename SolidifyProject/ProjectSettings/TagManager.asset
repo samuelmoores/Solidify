@@ -12,6 +12,8 @@ TagManager:
   - Environment
   - Snowball
   - IceCube
+  - Bullet
+  - HandWarmer
   layers:
   - Default
   - TransparentFX
