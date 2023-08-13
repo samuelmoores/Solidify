@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     Animator animator;
     IceGun iceGun;
-    GameManager gameManager;
     public GameObject IceCubeMesh;
 
     //-------------Movement---------------------
@@ -35,7 +34,6 @@ public class PlayerController : MonoBehaviour
     float movementSpeed = 6f;
     float rotateSpeed = 600f;
     float ySpeed;
-    [HideInInspector] public int iceCubes = 0;
 
     //-----------------Attacking----------------------------
     bool aim;
@@ -57,7 +55,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         MainCamera = GameObject.Find("Main Camera");
         AimCamera = GameObject.Find("AimCamera");
         DeathCamera = transform.Find("DeathCam").gameObject;
@@ -136,10 +133,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump") && !isFrozen && !pauseMenu.gameIsPaused)
             {
                 ySpeed = jumpSpeed;
-                jumping = true;
-            }else
-            {
-                jumping = false;
             }
         }
         
@@ -317,7 +310,6 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isShooting", false);
             shooting = false;
-            iceGun.hasShot = false;
 
         }
 
@@ -331,6 +323,13 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isShooting", false);
         }
 
+    }
+
+    void Jump()
+    {
+        //GetComponent<Rigidbody>().AddForce(Vector3.up * 600, ForceMode.Impulse);
+        
+        //animator.SetBool("isJumping", true);
     }
 
     void Dodge()
