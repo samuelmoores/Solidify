@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public float currentFreezeMeter;
     public List<Transform> SpawnPoints;
     float SolidifiedTimer = 5;
+    int spawnIndex = 0;
 
     //--------------Interacting-----------------------------
     [HideInInspector] public bool interacting = false;
@@ -77,11 +78,13 @@ public class PlayerController : MonoBehaviour
         GetInput();
         Move();
 
+        Debug.Log(spawnIndex);
+
         if (!pauseMenu.gameIsPaused)
         {
             if(!isFrozen)
             {
-                TakeDamage(Time.deltaTime / 75);
+                TakeDamage(Time.deltaTime / 20);
             }else
             {
                 TakeDamage(Time.deltaTime / 5);
@@ -178,7 +181,6 @@ public class PlayerController : MonoBehaviour
         {
             if(gameManager.numOfWarmers > 0)
             {
-                Debug.Log("Get Warm");
                 gameManager.numOfWarmers--;
                 currentFreezeMeter = 0;
             }
@@ -247,10 +249,22 @@ public class PlayerController : MonoBehaviour
             {
                 //Unfreeze and respawn at closest spawn point
                 Unfreeze();
+
+                GetComponent<CapsuleCollider>().enabled = false;
+                GetComponent<CharacterController>().enabled = false;
+
+                transform.position = SpawnPoints[spawnIndex].transform.position;
+
+                GetComponent<CapsuleCollider>().enabled = true;
+                GetComponent<CharacterController>().enabled = true;
+
                 currentFreezeMeter = 0;
                 SolidifiedTimer = 5;
                 DeathCamera.SetActive(false);
-            }else
+                MainCamera.SetActive(true);
+
+            }
+            else
             {
                 DeathCamera.SetActive(true);
             }
@@ -347,9 +361,8 @@ public class PlayerController : MonoBehaviour
 
     void Dodge()
     {
-        if (!dodging && !jumping)
+        if (!dodging && !jumping && !aim)
         {
-            Debug.Log("dodging");
             animator.SetBool("isDodging", true);
             dodging = true;
         }
@@ -389,6 +402,42 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("SpawnZone02"))
+        {
+            spawnIndex = 1;
+        }else if (other.CompareTag("SpawnZone03"))
+        {
+            spawnIndex = 2;
+        }
+        else if (other.CompareTag("SpawnZone04"))
+        {
+            spawnIndex = 3;
+        }
+        else if (other.CompareTag("SpawnZone05"))
+        {
+            spawnIndex = 4;
+        }
+        else if (other.CompareTag("SpawnZone06"))
+        {
+            spawnIndex = 5;
+        }
+        else if (other.CompareTag("SpawnZone07"))
+        {
+            spawnIndex = 6;
+        }
+        else if (other.CompareTag("SpawnZone08"))
+        {
+            spawnIndex = 7;
+        }
+        else if (other.CompareTag("SpawnZone09"))
+        {
+            spawnIndex = 8;
+        }
     }
 
 }
