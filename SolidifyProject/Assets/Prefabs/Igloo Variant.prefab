@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4226854440014113251, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -2937144876390972580, guid: 76154171c56159343bc73f9b9316869f, type: 3}
     - target: {fileID: 919132149155446097, guid: c4d1e62e4052b3a42bb3fa5894d3f6bf, type: 3}
       propertyPath: m_Name
       value: Igloo Variant

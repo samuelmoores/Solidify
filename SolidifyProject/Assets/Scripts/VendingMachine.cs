@@ -10,7 +10,6 @@ public class VendingMachine : MonoBehaviour
     public GameObject HandWarmer;
     public Transform dispenseLocation;
     bool canInteract = false;
-    float dispenseCoolDown = 0;
     bool dispensed = false;
 
     // Start is called before the first frame update

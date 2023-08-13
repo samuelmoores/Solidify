@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         healthBar = HUD.transform.GetChild(2).GetComponent<HealthBar>();
         healthBar.SetHealth(0);
         MainCamera.SetActive(true);
+
     }
 
     // Update is called once per frame
@@ -101,6 +102,13 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        //Check for dodge before calculating movement
+        //so the dodge can use the players movement direction
+        if (Input.GetButton("Dodge") || Input.GetKey(KeyCode.F))
+        {
+            Dodge();
+        }
+
         //set the direction for the movement based on where the player is going and where the camer is looking
         movement = new Vector3(horizontalInput, 0f, verticalInput);
         float magnitude = Mathf.Clamp01(movement.magnitude) * movementSpeed;
@@ -110,6 +118,7 @@ public class PlayerController : MonoBehaviour
         //Apply gravity
         ySpeed += Physics.gravity.y * Time.deltaTime;
 
+        //Check for jump
         if (characterController.isGrounded)
         {
             if (Input.GetButtonDown("Jump") && !isFrozen && !pauseMenu.gameIsPaused)
@@ -118,30 +127,17 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+        //Play jump animation
         animator.SetBool("isJumping", !characterController.isGrounded);
         
+        //Set value to move the character upwards
         velocity = movement * magnitude;
         velocity.y = ySpeed;
 
         if (!jumping && !isFrozen)
             GetAimInput();
 
-        if(Input.GetButtonDown("Dodge") || Input.GetKeyDown(KeyCode.F))
-        {
-            Dodge();
-        }
-
-
-        if(Input.GetButtonUp("Dodge") || Input.GetKeyUp(KeyCode.F))
-        {
-            if(!isFrozen)
-            {
-                animator.SetBool("isDodging", false);
-
-                dodging = false;
-            }
-        }
-
+        //Show the ice cube that the player has solidified in
         if(isFrozen)
         {
             IceCubeMesh.GetComponent<MeshRenderer>().enabled = true;
@@ -331,8 +327,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!dodging && !jumping)
         {
-            //GetComponent<Rigidbody>().AddForce(transform.forward * 900, ForceMode.Impulse);
-            velocity.z += -dodgeSpeed;
+            movementSpeed = 25;
+
+            Debug.Log("dodging");
             animator.SetBool("isDodging", true);
         }
 
@@ -340,8 +337,8 @@ public class PlayerController : MonoBehaviour
 
     void EndDodge()
     {
+        animator.SetBool("isDodging", false);
         dodging = false;
-
     }
 
     public void Freeze()
