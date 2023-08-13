@@ -4,20 +4,54 @@ using UnityEngine;
 
 public class IceGun : MonoBehaviour
 {
+    public GameObject Player;
+    PlayerController controller;
     public Transform gunContainer;
     public GameObject IceCubeRef;
     public GameObject StoneRef;
     public AudioSource shootingSound;
     public Transform IceCubeShootPosition;
     public Transform StoneShootPosition;
-
+    bool canPickup;
+    public GameObject interactMessage;
 
     GameObject IceCube;
     GameObject Stone;
 
     Vector3 shotDirection;
     public float gunStrength;
-    
+
+    private void Start()
+    {
+        controller = Player.GetComponent<PlayerController>();
+    }
+
+    private void Update()
+    {
+        if(canPickup)
+        {
+            if(controller.hasGun)
+            {
+                interactMessage.SetActive(false);
+            }else
+            {
+                interactMessage.SetActive(true);
+            }
+
+            if(controller.interacting && !controller.hasGun)
+            {
+                Pickup();
+            }
+        }else
+        {
+            interactMessage.SetActive(false);
+
+        }
+
+
+
+    }
+
     public void Shoot()
     {
         shootingSound.Play();
@@ -46,17 +80,28 @@ public class IceGun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Pickup(other);
+        if (other.CompareTag("Player"))
+        {
+            canPickup = true;
+
+        }
+        
     }
 
-    void Pickup(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            transform.SetParent(gunContainer);
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.Euler(Vector3.zero);
-            transform.localScale = Vector3.one;
+            canPickup = false;
         }
+    }
+
+    void Pickup()
+    {
+        transform.SetParent(gunContainer);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
+        transform.localScale = Vector3.one;
+        controller.hasGun = true;
     }
 }

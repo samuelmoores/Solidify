@@ -103,8 +103,6 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         
-        Debug.Log(dodgeCooldown);
-
         dodgeCooldown -= Time.deltaTime;
 
         if (dodging)
@@ -365,22 +363,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Gun"))
-            hasGun = true;
-
-    }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.CompareTag("Environment"))
-        {
-            //animator.SetBool("isJumping", false);
-            //jumping = false;
-
-        }
 
         if(collision.gameObject.CompareTag("Snowball"))
         {
