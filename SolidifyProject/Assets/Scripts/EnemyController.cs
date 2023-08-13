@@ -20,7 +20,8 @@ public class EnemyController : MonoBehaviour
     Animator animator;
     float attackCooldown;
 
-    public int attackRadius;
+    public int attackDistance;
+    public int sightDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,13 @@ public class EnemyController : MonoBehaviour
     {
         agent.destination = Destination.transform.position;
 
-        if (agent.remainingDistance < attackRadius && !agent.pathPending)
+        if(agent.remainingDistance > sightDistance)
+        {
+            agent.isStopped = true;
+            animator.SetBool("isWalking", false);
+        }
+
+        if (agent.remainingDistance < attackDistance && !agent.pathPending)
         {
             attackCooldown -= Time.deltaTime;
 
@@ -82,7 +89,7 @@ public class EnemyController : MonoBehaviour
 
 
         }
-        else if(agent.remainingDistance > attackRadius && !agent.pathPending)
+        else if(agent.remainingDistance > attackDistance && !agent.pathPending)
         {
             agent.isStopped = false;
             animator.SetBool("isWalking", true);

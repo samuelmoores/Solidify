@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     bool aim;
     bool shooting = false;
     [HideInInspector] public bool hasGun = false;
+    public float dodgeSpeed;
 
     //-------------Health-------------------------------------
     [HideInInspector] public bool isFrozen = false;
@@ -130,6 +131,7 @@ public class PlayerController : MonoBehaviour
             Dodge();
         }
 
+
         if(Input.GetButtonUp("Dodge") || Input.GetKeyUp(KeyCode.F))
         {
             if(!isFrozen)
@@ -207,7 +209,7 @@ public class PlayerController : MonoBehaviour
 
     void TakeDamage(float damage)
     {
-        if(currentFreezeMeter < 1)
+        if(currentFreezeMeter <= 1)
         {
             currentFreezeMeter += damage;
             healthBar.SetHealth(currentFreezeMeter);
@@ -330,9 +332,15 @@ public class PlayerController : MonoBehaviour
         if (!dodging && !jumping)
         {
             //GetComponent<Rigidbody>().AddForce(transform.forward * 900, ForceMode.Impulse);
+            velocity.z += -dodgeSpeed;
             animator.SetBool("isDodging", true);
-            dodging = true;
         }
+
+    }
+
+    void EndDodge()
+    {
+        dodging = false;
 
     }
 
