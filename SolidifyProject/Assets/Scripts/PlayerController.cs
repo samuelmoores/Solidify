@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             if(!isFrozen)
             {
-                TakeDamage(Time.deltaTime / 100);
+                TakeDamage(Time.deltaTime / 75);
             }else
             {
                 TakeDamage(Time.deltaTime / 5);
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
             IceCubeMesh.GetComponent<MeshRenderer>().enabled = false;
         }
 
-
+        //Interacting
         if(Input.GetButton("Interact"))
         {
             interacting = true;
@@ -171,6 +171,18 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonUp("Interact"))
         {
             interacting = false;
+        }
+
+        //Warming
+        if(Input.GetButtonDown("Warm"))
+        {
+            if(gameManager.numOfWarmers > 0)
+            {
+                Debug.Log("Get Warm");
+                gameManager.numOfWarmers--;
+                currentFreezeMeter = 0;
+            }
+
         }
         
 

@@ -9,6 +9,7 @@ public class VendingMachine : MonoBehaviour
     public GameObject interactMessage;
     public GameObject HandWarmer;
     public Transform dispenseLocation;
+    GameManager gameManager;
     bool canInteract = false;
     bool dispensed = false;
 
@@ -16,6 +17,7 @@ public class VendingMachine : MonoBehaviour
     void Start()
     {
         controller = Player.GetComponent<PlayerController>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -23,8 +25,9 @@ public class VendingMachine : MonoBehaviour
     {
         if(canInteract)
         {
-            if (controller.interacting && !dispensed)
+            if (controller.interacting && !dispensed && gameManager.numOfCoins > 3)
             {
+                gameManager.numOfCoins -= 3;
                 DispenseHandWarmer();
             }
 

@@ -31,7 +31,6 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameIsPaused = false;
-        HealthBar.SetActive(true);
 
     }
     void Pause()
@@ -43,7 +42,6 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
         ResumeButton.Select();
         HealthBar = GameObject.Find("HealthBar");
-        HealthBar.SetActive(false);
 
     }
 
