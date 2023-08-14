@@ -71,8 +71,6 @@ public class EnemyController : MonoBehaviour
         {
             agent.destination = Destination.transform.position;
 
-            Debug.Log(agent.remainingDistance);
-
             if (agent.remainingDistance > sightDistance)
             {
                 agent.isStopped = true;

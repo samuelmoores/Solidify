@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,8 +40,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public int iceCubes = 0;
     float stepOffset;
     bool canJump = true;
-    public float jumpSlope;
     public bool onSnowmobile = false;
+    public float jumpSlope;
 
     //-----------------Attacking----------------------------
     bool aim;
@@ -60,6 +61,9 @@ public class PlayerController : MonoBehaviour
 
     //--------------Interacting-----------------------------
     [HideInInspector] public bool interacting = false;
+    bool youWin = false;
+    public GameObject youWinMessage;
+    float youWinTimer = 4;
 
     private void Start()
     {
@@ -117,6 +121,18 @@ public class PlayerController : MonoBehaviour
             if(interacting)
             {
                 animator.SetBool("onSnowmobile", false);
+            }
+        }
+
+        if(youWin)
+        {
+            youWinTimer -= Time.deltaTime;
+
+            if(youWinTimer <= 0)
+            {
+                SceneManager.LoadScene(0);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
 
@@ -470,12 +486,18 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("SpawnZone09"))
         {
             spawnIndex = 8;
+        }else if(other.CompareTag("YouWin"))
+        {
+            youWinMessage.SetActive(true);
+
+            youWin = true;
+
         }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.normal.y <= jumpSlope)
+        if (hit.normal.y <= jumpSlope)
         {
             canJump = false;
         }

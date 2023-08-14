@@ -21,15 +21,14 @@ public class Snowmobile : MonoBehaviour
     private void Update()
     {
 
-        Debug.Log(controller.onSnowmobile && controller.interacting);
-
+        
         if (controller.onSnowmobile && controller.interacting)
         {
             transform.SetParent(null);
             controller.onSnowmobile = false;
         }
 
-        if (controller.interacting && canRide)
+        if (controller.interacting && canRide && gameManager.numOfEngineParts == 4)
         {
             controller.onSnowmobile = true;
             transform.SetParent(Player.transform, false);

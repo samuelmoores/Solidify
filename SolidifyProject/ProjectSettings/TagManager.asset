@@ -22,6 +22,7 @@ TagManager:
   - SpawnZone07
   - SpawnZone08
   - SpawnZone09
+  - YouWin
   layers:
   - Default
   - TransparentFX
