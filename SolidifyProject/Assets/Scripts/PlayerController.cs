@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         {
             if(!isFrozen)
             {
-                TakeDamage(Time.deltaTime / 20);
+                TakeDamage(Time.deltaTime / 75);
             }else
             {
                 TakeDamage(Time.deltaTime / 5);

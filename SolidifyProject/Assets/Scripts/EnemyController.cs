@@ -134,7 +134,7 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            health -= 0.5f;
+            health -= 0.01f;
             healthBar.SetHealth(health);
         }
     }
