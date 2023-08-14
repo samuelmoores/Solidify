@@ -87,13 +87,18 @@ public class PlayerController : MonoBehaviour
 
         if (!pauseMenu.gameIsPaused)
         {
-            if(!isFrozen)
+            if(!onSnowmobile)
             {
-                TakeDamage(Time.deltaTime / 75);
-            }else
-            {
-                TakeDamage(Time.deltaTime / 5);
+                if (!isFrozen)
+                {
+                    TakeDamage(Time.deltaTime / 75);
+                }
+                else
+                {
+                    TakeDamage(Time.deltaTime / 5);
+                }
             }
+            
         }
 
         if(aim && hasGun)
@@ -256,7 +261,7 @@ public class PlayerController : MonoBehaviour
     {
         if(currentFreezeMeter <= 1)
         {
-            currentFreezeMeter += Time.deltaTime / 75;
+            currentFreezeMeter += damage;
 
             healthBar.SetHealth(currentFreezeMeter);
         }
@@ -265,7 +270,7 @@ public class PlayerController : MonoBehaviour
             //Solidified Timer
             SolidifiedTimer -= Time.deltaTime;
 
-            currentFreezeMeter -= Time.deltaTime / 25;
+            currentFreezeMeter -= damage;
 
             if(!hasFrozen && gameManager.numOfWarmers > 0)
             {

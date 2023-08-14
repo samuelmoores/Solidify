@@ -58,7 +58,10 @@ public class EnemyController : MonoBehaviour
 
             isDead = true;
             animator.SetBool("isDead", true);
+
             HealthBar.SetActive(false);
+
+
             CrystalRef = Instantiate(Crystal, transform.position, transform.rotation);
             Destroy(gameObject, 5);
 
@@ -68,6 +71,7 @@ public class EnemyController : MonoBehaviour
         {
             agent.destination = Destination.transform.position;
 
+            Debug.Log(agent.remainingDistance);
 
             if (agent.remainingDistance > sightDistance)
             {

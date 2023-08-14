@@ -41,7 +41,7 @@ public class Snowmobile : MonoBehaviour
 
         if(controller.onSnowmobile)
         {
-            controller.movementSpeed = 45f;
+            controller.movementSpeed = 30f;
         }
 
     }
