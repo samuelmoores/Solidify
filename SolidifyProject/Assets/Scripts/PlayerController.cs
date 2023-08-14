@@ -33,12 +33,14 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     bool dodging = false;
     bool usingMouse = true;
-    float movementSpeed = 6f;
+    [HideInInspector] public float movementSpeed = 6f;
     float rotateSpeed = 600f;
     float ySpeed;
     [HideInInspector] public int iceCubes = 0;
     float stepOffset;
     bool canJump = true;
+    public float jumpSlope;
+    public bool onSnowmobile = false;
 
     //-----------------Attacking----------------------------
     bool aim;
@@ -46,13 +48,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool hasGun = false;
     public float dodgeSpeed;
     float dodgeCooldown = 0;
+    bool hasFrozen = false;
 
     //-------------Health-------------------------------------
     [HideInInspector] public bool isFrozen = false;
     [HideInInspector] public bool isDead = false;
     [HideInInspector] public float currentFreezeMeter;
     public List<Transform> SpawnPoints;
-    float SolidifiedTimer = 5;
+    float SolidifiedTimer = 1;
     int spawnIndex = 0;
 
     //--------------Interacting-----------------------------
@@ -101,6 +104,15 @@ public class PlayerController : MonoBehaviour
         {
             MainCamera.SetActive(true);
             AimCamera.SetActive(false);
+        }
+
+        if(onSnowmobile)
+        {
+            animator.SetBool("onSnowmobile", true);
+            if(interacting)
+            {
+                animator.SetBool("onSnowmobile", false);
+            }
         }
 
     }
@@ -194,7 +206,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        
 
     }
 
@@ -256,9 +267,13 @@ public class PlayerController : MonoBehaviour
 
             currentFreezeMeter -= Time.deltaTime / 25;
 
-            gameManager.numOfWarmers--;
-
-            if(SolidifiedTimer < 0)
+            if(!hasFrozen && gameManager.numOfWarmers > 0)
+            {
+                gameManager.numOfWarmers--;
+                hasFrozen = true;
+            }
+            
+            if (SolidifiedTimer < 0)
             {
                 //Unfreeze and respawn at closest spawn point
                 Unfreeze();
@@ -272,7 +287,7 @@ public class PlayerController : MonoBehaviour
                 GetComponent<CharacterController>().enabled = true;
 
                 currentFreezeMeter = 0;
-                SolidifiedTimer = 5;
+                SolidifiedTimer = 1;
                 DeathCamera.SetActive(false);
                 MainCamera.SetActive(true);
 
@@ -399,13 +414,14 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isHit", false);
         isFrozen = false;
+        hasFrozen = false;
+
     }
 
 
-    
+
     private void OnCollisionEnter(Collision collision)
     {
-
 
         if(collision.gameObject.CompareTag("Snowball"))
         {
@@ -414,7 +430,6 @@ public class PlayerController : MonoBehaviour
                 Freeze();
             }
         }
-
 
     }
 
@@ -450,6 +465,18 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("SpawnZone09"))
         {
             spawnIndex = 8;
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.normal.y <= jumpSlope)
+        {
+            canJump = false;
+        }
+        else
+        {
+            canJump = true;
         }
     }
 

@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
         BGSound.Play();
         BGMusic.Play();
 
+        numOfCrystals = 4; numOfWarmers = 4;
+        numOfEngineParts = 4;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

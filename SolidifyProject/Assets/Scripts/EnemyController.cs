@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     public HealthBar healthBar;
     bool isDead = false;
     public GameObject HealthBar;
+    public GameObject Crystal;
+    GameObject CrystalRef;
 
     NavMeshAgent agent;
     Animator animator;
@@ -57,6 +59,7 @@ public class EnemyController : MonoBehaviour
             isDead = true;
             animator.SetBool("isDead", true);
             HealthBar.SetActive(false);
+            CrystalRef = Instantiate(Crystal, transform.position, transform.rotation);
             Destroy(gameObject, 5);
 
         }
@@ -71,6 +74,7 @@ public class EnemyController : MonoBehaviour
                 agent.isStopped = true;
                 animator.SetBool("isWalking", false);
             }
+            
 
             if (agent.remainingDistance < attackDistance && !agent.pathPending)
             {
@@ -134,7 +138,7 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            health -= 0.01f;
+            health -= 0.1f;
             healthBar.SetHealth(health);
         }
     }

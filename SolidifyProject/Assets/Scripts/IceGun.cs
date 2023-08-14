@@ -90,7 +90,7 @@ public class IceGun : MonoBehaviour
         shotDirection = new Vector3(0f, -StoneShootPosition.position.y, 0f);
         if (Stone != null)
         {
-            Stone.GetComponent<Rigidbody>().AddForce(StoneShootPosition.transform.forward * gunStrength * 3, ForceMode.Impulse);
+            Stone.GetComponent<Rigidbody>().AddForce(StoneShootPosition.transform.forward * 1250, ForceMode.Impulse);
         }
     }
 

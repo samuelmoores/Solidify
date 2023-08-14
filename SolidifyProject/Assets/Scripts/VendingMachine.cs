@@ -25,7 +25,7 @@ public class VendingMachine : MonoBehaviour
     {
         if(canInteract)
         {
-            if (controller.interacting && !dispensed && gameManager.numOfCoins > 3)
+            if (controller.interacting && !dispensed && gameManager.numOfCoins >= 3)
             {
                 gameManager.numOfCoins -= 3;
                 DispenseHandWarmer();
