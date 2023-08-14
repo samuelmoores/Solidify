@@ -525,6 +525,74 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7168019813296214662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8043878797754749401}
+  - component: {fileID: 6398481291458461032}
+  - component: {fileID: 7866796842623565650}
+  m_Layer: 0
+  m_Name: HealingAura
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8043878797754749401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7168019813296214662}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7137343634109837055}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6398481291458461032
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7168019813296214662}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.327418, y: 1.534555, z: 18.588255}
+  m_Center: {x: -0.8584155, y: -2.7291977, z: -1.5591625}
+--- !u!114 &7866796842623565650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7168019813296214662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90b924bb6d0fa34ba7e0262bc7cf692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healRate: 0.03
+  controller: {fileID: 0}
 --- !u!1 &7751617442225726925
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +995,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04ce9fb2fbce0a5498ec346ff88319d3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1526946852723588129}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04ce9fb2fbce0a5498ec346ff88319d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8043878797754749401}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04ce9fb2fbce0a5498ec346ff88319d3, type: 3}
       insertIndex: -1
