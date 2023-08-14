@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         GetInput();
         Move();
 
-       // Debug.Log(canJump);
+       Debug.Log(currentFreezeMeter);
 
         if (!pauseMenu.gameIsPaused)
         {
@@ -247,12 +247,16 @@ public class PlayerController : MonoBehaviour
     {
         if(currentFreezeMeter <= 1)
         {
+            currentFreezeMeter += Time.deltaTime / 75;
+
             healthBar.SetHealth(currentFreezeMeter);
         }
         else if (isFrozen)
         {
             //Solidified Timer
             SolidifiedTimer -= Time.deltaTime;
+
+            currentFreezeMeter -= Time.deltaTime / 25;
 
             gameManager.numOfWarmers--;
 
