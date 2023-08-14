@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.XR;
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
     float rotateSpeed = 600f;
     float ySpeed;
     [HideInInspector] public int iceCubes = 0;
+    float stepOffset;
+    bool canJump = true;
 
     //-----------------Attacking----------------------------
     bool aim;
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
         healthBar = HUD.transform.GetChild(2).GetComponent<HealthBar>();
         healthBar.SetHealth(0);
         MainCamera.SetActive(true);
+        stepOffset = characterController.stepOffset;
 
     }
 
@@ -78,7 +82,7 @@ public class PlayerController : MonoBehaviour
         GetInput();
         Move();
 
-        Debug.Log(spawnIndex);
+       // Debug.Log(canJump);
 
         if (!pauseMenu.gameIsPaused)
         {
@@ -113,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
         if (dodging)
         {
-            movementSpeed = 25;
+            movementSpeed = 15;
         }
         
         //Check for dodge before calculating movement
@@ -136,7 +140,10 @@ public class PlayerController : MonoBehaviour
         //Check for jump
         if (characterController.isGrounded)
         {
-            if (Input.GetButtonDown("Jump") && !isFrozen && !pauseMenu.gameIsPaused)
+            characterController.stepOffset = stepOffset;
+            ySpeed = -3.5f;
+
+            if (Input.GetButtonDown("Jump") && !isFrozen && !pauseMenu.gameIsPaused && canJump)
             {
                 ySpeed = jumpSpeed;
                 jumping = true;
@@ -144,6 +151,9 @@ public class PlayerController : MonoBehaviour
             {
                 jumping = false;
             }
+        }else
+        {
+            characterController.stepOffset = 0f;
         }
         
         //Play jump animation
@@ -237,13 +247,14 @@ public class PlayerController : MonoBehaviour
     {
         if(currentFreezeMeter <= 1)
         {
-            currentFreezeMeter += damage;
             healthBar.SetHealth(currentFreezeMeter);
         }
         else if (isFrozen)
         {
             //Solidified Timer
             SolidifiedTimer -= Time.deltaTime;
+
+            gameManager.numOfWarmers--;
 
             if(SolidifiedTimer < 0)
             {
