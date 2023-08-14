@@ -1912,22 +1912,22 @@ MonoBehaviour:
 
     Right Stick - Look
 
-    Right Trigger - Shoot Iceicales
+    Right Trigger - Shoot Ice Cubes
 
     Left Trigger
     - Aim
 
+    Right Shoulder - Shoot Icicle
+
     Buttom Face Button - Jump
 
-    Left Face Button - Interact
+    Left
+    Face Button - Interact
 
-    Right
-    Face Button - Dodge Roll
+    Right Face Button - Dodge Roll
 
-    Top Face Button - Shoot Ice Cubes
-
-    Right Shoulder
-    Button - Drive Snowmobile
+    Top Face Button
+    - Get Warm
 
     Start Button - Pause'
   m_isRightToLeft: 0
@@ -2172,16 +2172,14 @@ MonoBehaviour:
     Right Mouse - Aim
 
     Left
-    Mouse - Shoot Iceicles
+    Mouse - Shoot Ice Cubes
 
-    Q - Shoot Ice Cubes
+    Q - Shoot Icicle
 
     E - Interact
 
     F - Dodge
     Roll
-
-    Left Shift - Drive Snowmobile
 
     Tab - Pause'
   m_isRightToLeft: 0

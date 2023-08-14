@@ -82,8 +82,6 @@ public class PlayerController : MonoBehaviour
         GetInput();
         Move();
 
-       Debug.Log(currentFreezeMeter);
-
         if (!pauseMenu.gameIsPaused)
         {
             if(!isFrozen)

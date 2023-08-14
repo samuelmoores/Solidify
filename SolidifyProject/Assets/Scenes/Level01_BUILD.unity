@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 318863943}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
@@ -4720,7 +4720,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 318863943}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
@@ -7456,7 +7456,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 318863943}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: SelectResumeButton
         m_Mode: 1
@@ -10860,16 +10860,14 @@ MonoBehaviour:
     Right Mouse - Aim
 
     Left
-    Mouse - Shoot Iceicles
+    Mouse - Shoot Ice Cubes
 
-    Q - Shoot Ice Cubes
+    Q - Shoot Icicles
 
     E - Interact
 
     F - Dodge
     Roll
-
-    Left Shift - Drive Snowmobile
 
     Tab - Pause'
   m_isRightToLeft: 0
@@ -11125,7 +11123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 318863943}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -12711,22 +12709,22 @@ MonoBehaviour:
 
     Right Stick - Look
 
-    Right Trigger - Shoot Iceicales
+    Right Trigger - Shoot Ice Cube
 
-    Left Trigger
-    - Aim
+    Right Shoulder
+    - Shoot Icicle
+
+    Left Trigger - Aim
 
     Buttom Face Button - Jump
 
-    Left Face Button - Interact
+    Left
+    Face Button - Interact
 
-    Right
-    Face Button - Dodge Roll
+    Right Face Button - Dodge Roll
 
-    Top Face Button - Shoot Ice Cubes
-
-    Right Shoulder
-    Button - Drive Snowmobile
+    Top Face Button
+    - Get Warm
 
     Start Button - Pause'
   m_isRightToLeft: 0
@@ -13157,7 +13155,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 318863943}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: SelectedBackButton
         m_Mode: 1
