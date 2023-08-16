@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         //terrain sliding
         if (!canJump)
         {
-            Debug.Log("RATE: " + slideRateVector.x + ", " + slideRateVector.y + ", " + slideRateVector.z);
+            //Debug.Log("RATE: " + slideRateVector.x + ", " + slideRateVector.y + ", " + slideRateVector.z);
             characterController.Move(slideRateVector * Time.deltaTime * slideRate);
         }
 

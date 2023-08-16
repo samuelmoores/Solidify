@@ -34,11 +34,11 @@ RectTransform:
   - {fileID: 8384357776290656054}
   m_Father: {fileID: 4449466428739974908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -146}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3148623111349387600
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1072,7 +1072,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ' Vending Machine'
+  m_Text: 'Vending Machine
+
+    Hand warmer - 3 Coins
+
+    Press "E" '
 --- !u!1 &2236994069218215519
 GameObject:
   m_ObjectHideFlags: 0
@@ -4128,7 +4132,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ice Gun
+  m_Text: 'Ice Gun
+
+    Press "E"'
 --- !u!1 &9203855175790213326
 GameObject:
   m_ObjectHideFlags: 0
