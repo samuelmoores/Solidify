@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 175778074c31e0b4988f3aef29079ea9, type: 3}
       propertyPath: m_Name
-      value: Coin (9)
+      value: coinRotate
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 175778074c31e0b4988f3aef29079ea9, type: 3}
       propertyPath: m_TagString
@@ -122,8 +122,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.0038059936, z: 0.020000003}
-  m_Center: {x: 0, y: 0.0012338023, z: 1.753338e-17}
+  m_Size: {x: 0.02, y: 0.02, z: 0.020000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &3972019435844949114
 Animator:
   serializedVersion: 5
