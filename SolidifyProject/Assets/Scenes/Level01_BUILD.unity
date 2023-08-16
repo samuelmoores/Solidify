@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 1, g: 1, b: 1, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -1302,6 +1302,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3994883901995645513, guid: 92db7458351f342449163c7c5b565dbb, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1223626039}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7037,6 +7041,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3994883901995645513, guid: 92db7458351f342449163c7c5b565dbb, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1223626039}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9435,6 +9443,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3994883901995645513, guid: 92db7458351f342449163c7c5b565dbb, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1223626039}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19123,6 +19135,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3994883901995645513, guid: 92db7458351f342449163c7c5b565dbb, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1223626039}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25752,7 +25768,6 @@ SceneRoots:
   - {fileID: 454918099}
   - {fileID: 1898499018}
   - {fileID: 1543994985}
-  - {fileID: 1223626022}
   - {fileID: 77859334}
   - {fileID: 1836362405}
   - {fileID: 1202799896}
@@ -25775,4 +25790,5 @@ SceneRoots:
   - {fileID: 252570611}
   - {fileID: 294804508}
   - {fileID: 672544239}
+  - {fileID: 1223626022}
   - {fileID: 153694610}
