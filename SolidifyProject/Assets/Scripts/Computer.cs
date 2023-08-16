@@ -9,11 +9,17 @@ public class Computer : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        message.SetActive(true);
+        if (other.CompareTag("Player")) 
+        {
+            message.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        message.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            message.SetActive(false);
+        }
     }
 }
