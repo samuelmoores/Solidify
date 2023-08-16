@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     //-------------Movement---------------------
     Vector3 movement;
     Vector3 velocity;
+    private Vector3 slideRateVector;
+    public float slideRate;
     float horizontalInput;
     float verticalInput;
     bool jumping = false;
@@ -80,6 +82,7 @@ public class PlayerController : MonoBehaviour
         healthBar.SetHealth(0);
         MainCamera.SetActive(true);
         stepOffset = characterController.stepOffset;
+        slideRateVector.y = -1 * slideRate;
 
     }
 
@@ -136,6 +139,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //terrain sliding
+        if (!canJump)
+        {
+            Debug.Log("RATE: " + slideRateVector.x + ", " + slideRateVector.y + ", " + slideRateVector.z);
+            characterController.Move(slideRateVector * Time.deltaTime * slideRate);
+        }
+
     }
 
     void GetInput()
@@ -166,7 +176,10 @@ public class PlayerController : MonoBehaviour
         movement = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up) * movement;
 
         //Apply gravity
-        ySpeed += Physics.gravity.y * Time.deltaTime;
+        if (!characterController.isGrounded)
+        {
+            ySpeed += Physics.gravity.y * Time.deltaTime;
+        }
 
         //Check for jump
         if (characterController.isGrounded)
@@ -500,6 +513,10 @@ public class PlayerController : MonoBehaviour
         if (hit.normal.y <= jumpSlope)
         {
             canJump = false;
+            slideRateVector.x = hit.normal.x;
+            slideRateVector.y = hit.normal.y * -1;
+            slideRateVector.z = hit.normal.z;
+
         }
         else
         {
